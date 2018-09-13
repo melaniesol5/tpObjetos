@@ -1,0 +1,88 @@
+import tpRolando.*
+
+/* TESTS PUNTO 1 */
+test "El Nivel De Hechiceria de rolando es 56 " {
+
+	assert.equals(56,rolando.nivelDeHechiceria())
+
+}
+
+test "Al cambiar el nombre del espectro maléfico a espectro superrecontramalefico muajajaja , el nivel de 
+hechiceria de Rolando es 125 "{
+	espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
+
+	assert.equals(125,rolando.nivelDeHechiceria())
+}
+
+test "Al cambiar el hechizo preferido de Rolando para que sea hechizo basico , su nivel de hechiceria es 35" {
+  rolando.hechizoPreferido(hechizoBasico)
+	assert.equals(35,rolando.nivelDeHechiceria())
+
+}
+
+test "Cuando ocurre un eclipse, el nivel de hechiceria de Rolando es es 61" {
+    fuerzaOscura.eclipse()
+	assert.equals(61,rolando.nivelDeHechiceria())
+
+}
+
+test "El espectro malefico es poderoso" {
+    
+	assert.that(espectroMalefico.esPoderoso())
+
+}
+
+test "Al cambiar el nombre del espectro malefico a pepe , el espectro malefico no es poderoso "{
+    espectroMalefico.nombre("pepe")
+	assert.equals(false,espectroMalefico.esPoderoso())
+
+}
+
+test "El hechizo basico no es poderoso" {
+    
+	assert.equals(false,hechizoBasico.esPoderoso())
+
+}
+
+
+/* TESTS PUNTO 2 */
+
+test "Al eliminar todos los artefactos de Rolando , su habilidad para la lucha es 1" {
+    rolando.removerArtefacto(espadaDelDestino)
+    rolando.removerArtefacto(collarDivino)
+    rolando.removerArtefacto(mascaraOscura)
+	assert.equals(1,rolando.habilidadParaLaLucha())
+
+}
+
+test " Cuando Rolando posee todos sus artefactos su habilidad para la lucha es 13" {
+    
+	assert.equals(13,rolando.habilidadParaLaLucha())
+
+}
+
+test "Cuando se cambia la cantidad de perlas de collar divino a 3, la habilidad para la lucha de rolando con todos sus 
+ artefactos es 11" {
+     collarDivino.cantidadDePerlas(3)
+	assert.equals(11,rolando.habilidadParaLaLucha())
+
+}
+
+test " Cuando se cambia el valor de base para la lucha de Rolando a 8 y este posee todos
+    sus artefactos,su habilidad es 20 " {
+     rolando.valorDeBaseParaLucha(8)
+	assert.equals(20,rolando.habilidadParaLaLucha())
+
+}
+
+test "Cuando ocurre un eclipse, el valor de lucha de la mascara oscura es  5"  {
+     fuerzaOscura.eclipse()
+	assert.equals(5,mascaraOscura.nivelDeLucha())
+
+}
+
+test "Cuando se elimina la mascara oscura de los artefactos de Rolando , su habilidad para la lucha es de 9" {
+     rolando.removerArtefacto(mascaraOscura)
+	assert.equals(9,rolando.habilidadParaLaLucha())
+
+}
