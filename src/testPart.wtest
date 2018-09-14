@@ -1,6 +1,10 @@
 import tpRolando.*
 
-/* TESTS PUNTO 1 */
+describe "Tests Primer Punto"{
+	fixture{
+		rolando.hechizoPreferido(espectroMalefico)
+		espectroMalefico.nombre("espectro malefico")
+	}
 test "El Nivel De Hechiceria de rolando es 56 " {
 
 	assert.equals(56,rolando.nivelDeHechiceria())
@@ -34,55 +38,14 @@ test "El espectro malefico es poderoso" {
 
 test "Al cambiar el nombre del espectro malefico a pepe , el espectro malefico no es poderoso "{
     espectroMalefico.nombre("pepe")
-	assert.equals(false,espectroMalefico.esPoderoso())
+	assert.notThat(espectroMalefico.esPoderoso())
 
 }
 
 test "El hechizo basico no es poderoso" {
     
-	assert.equals(false,hechizoBasico.esPoderoso())
+	assert.notThat(hechizoBasico.esPoderoso())
 
 }
 
 
-/* TESTS PUNTO 2 */
-
-test "Al eliminar todos los artefactos de Rolando , su habilidad para la lucha es 1" {
-    rolando.removerArtefacto(espadaDelDestino)
-    rolando.removerArtefacto(collarDivino)
-    rolando.removerArtefacto(mascaraOscura)
-	assert.equals(1,rolando.habilidadParaLaLucha())
-
-}
-
-test " Cuando Rolando posee todos sus artefactos su habilidad para la lucha es 13" {
-    
-	assert.equals(13,rolando.habilidadParaLaLucha())
-
-}
-
-test "Cuando se cambia la cantidad de perlas de collar divino a 3, la habilidad para la lucha de rolando con todos sus 
- artefactos es 11" {
-     collarDivino.cantidadDePerlas(3)
-	assert.equals(11,rolando.habilidadParaLaLucha())
-
-}
-
-test " Cuando se cambia el valor de base para la lucha de Rolando a 8 y este posee todos
-    sus artefactos,su habilidad es 20 " {
-     rolando.valorDeBaseParaLucha(8)
-	assert.equals(20,rolando.habilidadParaLaLucha())
-
-}
-
-test "Cuando ocurre un eclipse, el valor de lucha de la mascara oscura es  5"  {
-     fuerzaOscura.eclipse()
-	assert.equals(5,mascaraOscura.nivelDeLucha())
-
-}
-
-test "Cuando se elimina la mascara oscura de los artefactos de Rolando , su habilidad para la lucha es de 9" {
-     rolando.removerArtefacto(mascaraOscura)
-	assert.equals(9,rolando.habilidadParaLaLucha())
-
-}

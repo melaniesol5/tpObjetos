@@ -4,10 +4,12 @@ object rolando {
 	
 var valorDeBaseParaHechiceria = 3 
 	var valorDeBaseParaLucha = 1
-	var hechizoPreferido = espectroMalefico
-	var artefactos = [espadaDelDestino,collarDivino,mascaraOscura]
+	var hechizoPreferido 
+	var artefactos = []
 	
-
+    method artefactos(){
+    	return artefactos
+    }
 	method valorDeBaseParaHechiceria(unaCantidad){
 		valorDeBaseParaHechiceria = unaCantidad
 	}
@@ -20,6 +22,7 @@ var valorDeBaseParaHechiceria = 3
 		hechizoPreferido = unHechizo
 		
 	}
+	
 	method nivelDeHechiceria(){
 	return (valorDeBaseParaHechiceria * hechizoPreferido.poder() ) + fuerzaOscura.valor()	
 	}
@@ -31,14 +34,17 @@ var valorDeBaseParaHechiceria = 3
 method agregarArtefacto(unArtefacto){
 	artefactos.add(unArtefacto)
 }
+
 method removerArtefacto(unArtefacto){
 	artefactos.remove(unArtefacto)
 }
 
+method removerTodosLosArtefactos(){
+	artefactos.clear()
+}
+
 method habilidadParaLaLucha(){
-	
-	 return valorDeBaseParaLucha + artefactos.sum{artefacto =>artefacto.nivelDeLucha(self)}
-	
+	 return valorDeBaseParaLucha + artefactos.sum{artefacto =>artefacto.nivelDeLucha(self)}	
 }
 
 method tieneMayorHabilidadDeLuchaQueNivelDeHechiceria(){
@@ -46,19 +52,22 @@ method tieneMayorHabilidadDeLuchaQueNivelDeHechiceria(){
 }
 
 method laMejorPertenencia(){
-	 artefactos.map({artefacto=>artefacto.nivelDeLucha(self)}).max()
-	
+	 return artefactos.map({artefacto=>artefacto.nivelDeLucha(self)}).max()
 	}
+	
 method cantidadDeArtefactos(){
 	return artefactos.size()
+}
+
+method estaCargado(){
+	return self.cantidadDeArtefactos()>=5
 }				
 }
 
 object espectroMalefico {
 	
-var nombre = "espectro malefico"
-	
-	
+var nombre 
+		
  method nombre(unNombre){
  	nombre = unNombre
  }
@@ -66,10 +75,8 @@ var nombre = "espectro malefico"
  	return nombre.size()
  }
 
- 
  method esPoderoso(){
- 	return nombre.size() > 15 
- 	
+ 	return nombre.size() > 15 	
  }		
 	
 }
@@ -80,10 +87,10 @@ object hechizoBasico {
 	method poder() {
 	return 10
 	}
+	
 	method esPoderoso(){
 		return false 
 	}
-	
 }
 
 object fuerzaOscura {
@@ -109,10 +116,8 @@ object espadaDelDestino {
 	
 	}
 	
-	
-	
 object collarDivino {
-	var cantidadDePerlas = 5
+	var cantidadDePerlas 
 	
 
   method cantidadDePerlas(unaCantidad){
@@ -123,12 +128,10 @@ method nivelDeLucha(unPersonaje){
 return  cantidadDePerlas
 }
 
-}
-	
+}	
 	
 object mascaraOscura{
-		
-		
+				
 method nivelDeLucha(unPersonaje){
 return 4.max(fuerzaOscura.valor()/2)
 }
@@ -137,12 +140,13 @@ return 4.max(fuerzaOscura.valor()/2)
 object armadura{
 	
 	var nivelDeLucha=2
-	var refuerzo= bendicion
+	
+	var refuerzo
+	
 	method refuerzo(unRefuerzo){refuerzo=unRefuerzo}
 	
-	
 	method nivelDeLucha(unPersonaje){
-		if(refuerzo== "ninguno"){
+		if(refuerzo== null){
 			return nivelDeLucha
 		}else{
 			return nivelDeLucha+ refuerzo.unidadesDeLucha(unPersonaje)
@@ -152,6 +156,7 @@ object armadura{
 
 object cotaDeMalla{
 	var unidadesDeLucha=1
+	
 	method unidadesDeLucha(unPersonaje){
 		return unidadesDeLucha
 	}
@@ -164,22 +169,45 @@ object bendicion{
 }
 
 object hechizo{
+	var elHechizo
+	
+	method elHechizo(unHechizo){elHechizo=unHechizo}
 	
 	method unidadesDeLucha(unPersonaje){
-		return unPersonaje.hechizoPreferido().poder()
+		return elHechizo.poder()
 	}
-	
 }
 
 object espejoFantastico{
-	var nivelDeLucha=0
-	method nivelDeLucha(unPersonaje){
-		return 0
-		/*if(unPersonaje.cantidadDeArtefactos()==1){
+	var nivelDeLucha
+	
+	method nivelDeLucha(unPersonaje){	
+		if(unPersonaje.artefactos()==[self]){
 			return 0
-		}else{
-		return unPersonaje.laMejorPertenencia()}
-	}*/
+		}
+		unPersonaje.removerArtefacto(self)
+		nivelDeLucha = unPersonaje.laMejorPertenencia()
+		unPersonaje.agregarArtefacto(self)
+		return nivelDeLucha
+		
+	}
 }
+object libroDeHechizos{
+	var hechizos=[]
+	
+	method agregarHechizo(hechizo){
+		hechizos.add(hechizo)
+	}
+	
+	method removerHechizo(hechizo){
+		hechizos.remove(hechizo)
+	}
+	
+	method poder(){
+		return hechizos.filter({hechizo=>hechizo.esPoderoso()}).sum({hechizo=>hechizo.poder()})
+	}
+}
+/*pregunta2: ¿Que sucede si el libro de hechizos incluye como hechizo al mismo libro de hechiceria?
+ * si se incluye a si mismo rompe porque el objeto libroDeHechizos no conoce el mensaje esPoderoso()
+ */
 
-}
