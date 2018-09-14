@@ -2,8 +2,11 @@ import tpRolando.*
 
 describe "Test Tercer Punto"{
 	fixture{
+		rolando.hechizoPreferido(espectroMalefico)
+		espectroMalefico.nombre("espectro malefico")
 		rolando.agregarArtefacto(espadaDelDestino)
 		rolando.agregarArtefacto(collarDivino)
+		collarDivino.cantidadDePerlas(5)
 		rolando.agregarArtefacto(mascaraOscura)
 		rolando.agregarArtefacto(armadura)
 		rolando.agregarArtefacto(espejoFantastico)
@@ -11,7 +14,7 @@ describe "Test Tercer Punto"{
 	test "saber si rolando esta cargado"{
 		assert.that(rolando.estaCargado())
 	}
-	test "hacer que rolando se saque la armadur, saber si rolando esta cargado"{
+	test "hacer que rolando se saque la armadura, saber si rolando esta cargado"{
 		rolando.removerArtefacto(armadura)
 		assert.notThat(rolando.estaCargado())
 	}
@@ -19,6 +22,7 @@ describe "Test Tercer Punto"{
 		assert.equals(20, rolando.habilidadParaLaLucha())
 	}
 	test "saber cual es la habilidad para la lucha de la armadura de rolando si tiene una bendicion de refuerzo"{
+		
 		armadura.refuerzo(bendicion)
 		assert.equals(58, armadura.nivelDeLucha(rolando))
 	}

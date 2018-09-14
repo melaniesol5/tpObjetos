@@ -47,5 +47,5 @@ test "El hechizo basico no es poderoso" {
 	assert.notThat(hechizoBasico.esPoderoso())
 
 }
-
+}
 
