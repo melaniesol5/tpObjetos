@@ -1,5 +1,3 @@
-// PARTE 1
-
 object rolando {
 	
 var valorDeBaseParaHechiceria = 3 
