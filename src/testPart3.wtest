@@ -1,4 +1,6 @@
 import tpRolando.*
+import hechizos.*
+import artefactos.*
 
 describe "Test Tercer Punto"{
 	fixture{

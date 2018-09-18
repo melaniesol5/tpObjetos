@@ -1,4 +1,7 @@
 import tpRolando.*
+import hechizos.*
+import artefactos.*
+
 describe "tests segundo punto"{
 	fixture{
 		rolando.agregarArtefacto(espadaDelDestino)

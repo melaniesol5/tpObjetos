@@ -1,4 +1,6 @@
 import tpRolando.*
+import hechizos.*
+
 
 describe "Tests Primer Punto"{
 	fixture{

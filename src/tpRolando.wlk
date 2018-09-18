@@ -1,3 +1,6 @@
+import hechizos.*
+import artefactos.*
+
 object rolando {
 	
 var valorDeBaseParaHechiceria = 3 
@@ -62,95 +65,7 @@ method estaCargado(){
 }				
 }
 
-object espectroMalefico {
-	
-var nombre 
-		
- method nombre(unNombre){
- 	nombre = unNombre
- }
- method poder() {
- 	return nombre.size()
- }
 
- method esPoderoso(){
- 	return nombre.size() > 15 	
- }		
-	
-}
-
-object hechizoBasico {
-
-	
-	method poder() {
-	return 10
-	}
-	
-	method esPoderoso(){
-		return false 
-	}
-}
-
-object fuerzaOscura {
-	var valor = 5
-	
-	method valor() {
-		return valor
-	}
-	method valor(unValor) {
-		valor = unValor
-	}
-	method eclipse(){
-		valor *= 2
-	}
-}
-
-object espadaDelDestino {
-	var nivelDeLucha = 3
-
-	method nivelDeLucha(unPersonaje){
-	return nivelDeLucha
-	}
-	
-	}
-	
-object collarDivino {
-	var cantidadDePerlas 
-	
-
-  method cantidadDePerlas(unaCantidad){
-   cantidadDePerlas = unaCantidad
-  }
-
-method nivelDeLucha(unPersonaje){
-return  cantidadDePerlas
-}
-
-}	
-	
-object mascaraOscura{
-				
-method nivelDeLucha(unPersonaje){
-return 4.max(fuerzaOscura.valor()/2)
-}
-	}
-	
-object armadura{
-	
-	var nivelDeLucha=2
-	
-	var refuerzo
-	
-	method refuerzo(unRefuerzo){refuerzo=unRefuerzo}
-	
-	method nivelDeLucha(unPersonaje){
-		if(refuerzo== null){
-			return nivelDeLucha
-		}else{
-			return nivelDeLucha+ refuerzo.unidadesDeLucha(unPersonaje)
-		}
-	}
-}
 
 object cotaDeMalla{
 	var unidadesDeLucha=1
@@ -190,22 +105,3 @@ object espejoFantastico{
 		
 	}
 }
-object libroDeHechizos{
-	var hechizos=[]
-	
-	method agregarHechizo(hechizo){
-		hechizos.add(hechizo)
-	}
-	
-	method removerHechizo(hechizo){
-		hechizos.remove(hechizo)
-	}
-	
-	method poder(){
-		return hechizos.filter({hechizo=>hechizo.esPoderoso()}).sum({hechizo=>hechizo.poder()})
-	}
-}
-/*pregunta2: ¿Que sucede si el libro de hechizos incluye como hechizo al mismo libro de hechiceria?
- * si se incluye a si mismo rompe porque el objeto libroDeHechizos no conoce el mensaje esPoderoso()
- */
-
