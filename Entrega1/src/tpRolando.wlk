@@ -62,54 +62,12 @@ method cantidadDeArtefactos(){
 
 method estaCargado(){
 	return self.cantidadDeArtefactos()>=5
+}
+method asignarHabilidadAEspejo(){
+	self.removerArtefacto(espejoFantastico)
+    var nivel=self.laMejorPertenencia()
+    self.agregarArtefacto(espejoFantastico)
+    return nivel
 }				
 }
 
-
-
-object cotaDeMalla{
-	var unidadesDeLucha=1
-	
-	method unidadesDeLucha(unPersonaje){
-		return unidadesDeLucha
-	}
-}
-object bendicion{
-	
-	method unidadesDeLucha(unPersonaje){
-		return unPersonaje.nivelDeHechiceria()
-	}
-}
-
-object hechizo{
-	var elHechizo
-	
-	method elHechizo(unHechizo){elHechizo=unHechizo}
-	
-	method unidadesDeLucha(unPersonaje){
-		return elHechizo.poder()
-	}
-}
-
-object ninguno {
-	
-	method unidadesDeLucha(unPersonaje){
-		return 0
-	}
-}
-
-
-object espejoFantastico{
-	var nivelDeLucha
-	
-	method nivelDeLucha(unPersonaje){	
-		if(unPersonaje.artefactos()==[self]){
-			return 0
-		}
-		unPersonaje.removerArtefacto(self)
-		nivelDeLucha = unPersonaje.laMejorPertenencia()
-		unPersonaje.agregarArtefacto(self)
-		return nivelDeLucha
-		
-	}
-}

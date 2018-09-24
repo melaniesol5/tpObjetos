@@ -40,15 +40,52 @@ object armadura{
 	method refuerzo(unRefuerzo){refuerzo=unRefuerzo}
 	
 	method nivelDeLucha(unPersonaje){
-		if(self.esElRefuerzo(ninguno)){
-			return nivelDeLucha
-		}
-		else{
+		
 			return nivelDeLucha + refuerzo.unidadesDeLucha(unPersonaje)
-		}
-	}
-	method esElRefuerzo(unRefuerzo) {
-		return refuerzo === unRefuerzo
-	}
 	
 	}
+}	
+
+object cotaDeMalla{
+	var unidadesDeLucha=1
+	
+	method unidadesDeLucha(unPersonaje){
+		return unidadesDeLucha
+	}
+}
+object bendicion{
+	
+	method unidadesDeLucha(unPersonaje){
+		return unPersonaje.nivelDeHechiceria()
+	}
+}
+
+object hechizo{
+	var elHechizo
+	
+	method elHechizo(unHechizo){elHechizo=unHechizo}
+	
+	method unidadesDeLucha(unPersonaje){
+		return elHechizo.poder()
+	}
+}
+
+object ninguno {
+	
+	method unidadesDeLucha(unPersonaje){
+		return 0
+	}
+}
+
+
+object espejoFantastico{
+	var nivelDeLucha
+	
+	method nivelDeLucha(unPersonaje){	
+		if(unPersonaje.artefactos()==[self]){
+			return 0
+		}
+		return unPersonaje.asignarHabilidadAEspejo()	
+	}
+}
+	
