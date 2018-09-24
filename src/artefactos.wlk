@@ -40,11 +40,15 @@ object armadura{
 	method refuerzo(unRefuerzo){refuerzo=unRefuerzo}
 	
 	method nivelDeLucha(unPersonaje){
-		if(refuerzo== null){
+		if(self.esElRefuerzo(ninguno)){
 			return nivelDeLucha
-		}else{
-			return nivelDeLucha+ refuerzo.unidadesDeLucha(unPersonaje)
 		}
+		else{
+			return nivelDeLucha + refuerzo.unidadesDeLucha(unPersonaje)
+		}
+	}
+	method esElRefuerzo(unRefuerzo) {
+		return refuerzo === unRefuerzo
 	}
 	
 	}

@@ -12,6 +12,7 @@ describe "Test Tercer Punto"{
 		rolando.agregarArtefacto(mascaraOscura)
 		rolando.agregarArtefacto(armadura)
 		rolando.agregarArtefacto(espejoFantastico)
+		armadura.refuerzo(ninguno)
 	}
 	test "saber si rolando esta cargado"{
 		assert.that(rolando.estaCargado())

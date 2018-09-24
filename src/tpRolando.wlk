@@ -91,6 +91,14 @@ object hechizo{
 	}
 }
 
+object ninguno {
+	
+	method unidadesDeLucha(unPersonaje){
+		return 0
+	}
+}
+
+
 object espejoFantastico{
 	var nivelDeLucha
 	
