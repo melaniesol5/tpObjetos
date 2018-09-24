@@ -11,6 +11,7 @@ describe "Test Tercer Punto"{
 		collarDivino.cantidadDePerlas(5)
 		rolando.agregarArtefacto(mascaraOscura)
 		rolando.agregarArtefacto(armadura)
+		armadura.refuerzo(ninguno)
 		rolando.agregarArtefacto(espejoFantastico)
 		armadura.refuerzo(ninguno)
 	}
