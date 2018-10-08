@@ -112,4 +112,5 @@ describe "Test Tercer Punto" {
 
 // Replantearse la pregunta de la primer entrega acerca de la posibilidad de un libro de hechizo que tenga entre sus hechizos un libro de hechizos.
 
-//
+// Es posible dicha situacion si modificamos el comportamiento de la clase LibroDeHechizos agregandole un mensaje que reconozca esPoderoso()
+// En el caso de que haya dos libros de hechizos, pondriamos como criterio el libro de hechizos poderosos que tenga mas puntos de poder. 
