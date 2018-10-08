@@ -32,7 +32,12 @@ class Mascara {
 	var poderMinimo = 4
 	
 	constructor(unIndiceDeOscuridad) {
-		indiceDeOscuridad = unIndiceDeOscuridad
+		if (unIndiceDeOscuridad.between(0,1)) {
+			indiceDeOscuridad = unIndiceDeOscuridad
+		}
+		else {
+			self.error("Los valores no estan entre el 1 y el 0")
+		}
 	}
 	
 	method nivelDeLucha(unPersonaje) {
