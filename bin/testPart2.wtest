@@ -1,0 +1,50 @@
+import tpRolando.*
+import hechizos.*
+import artefactos.*
+
+describe "tests segundo punto"{
+	fixture{
+		rolando.agregarArtefacto(espadaDelDestino)
+		rolando.agregarArtefacto(collarDivino)
+		collarDivino.cantidadDePerlas(5)
+		rolando.agregarArtefacto(mascaraOscura)
+	}
+test "Al eliminar todos los artefactos de Rolando , su habilidad para la lucha es 1" {
+    rolando.removerTodosLosArtefactos()
+	assert.equals(1,rolando.habilidadParaLaLucha())
+
+}
+
+test " Cuando Rolando posee todos sus artefactos su habilidad para la lucha es 13" {
+    
+	assert.equals(13,rolando.habilidadParaLaLucha())
+
+}
+
+test "Cuando se cambia la cantidad de perlas de collar divino a 3, la habilidad para la lucha de rolando con todos sus 
+ artefactos es 11" {
+     collarDivino.cantidadDePerlas(3)
+	assert.equals(11,rolando.habilidadParaLaLucha())
+
+}
+
+test " Cuando se cambia el valor de base para la lucha de Rolando a 8 y este posee todos
+    sus artefactos,su habilidad es 20 " {
+     rolando.valorDeBaseParaLucha(8)
+	assert.equals(20,rolando.habilidadParaLaLucha())
+
+}
+
+test "Cuando ocurre un eclipse, el valor de lucha de la mascara oscura es  5"  {
+     fuerzaOscura.eclipse()
+	assert.equals(5,mascaraOscura.nivelDeLucha(rolando))
+
+}
+
+test "Cuando se elimina la mascara oscura de los artefactos de Rolando , su habilidad para la lucha es de 9" {
+     rolando.removerArtefacto(mascaraOscura)
+	assert.equals(9,rolando.habilidadParaLaLucha())
+
+}
+
+}
