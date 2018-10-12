@@ -41,15 +41,6 @@ class Mascara {
 	}
 	
 	method nivelDeLucha(unPersonaje) {
-		if(self.calculoNivelDeLucha() <= 0) {
-			return poderMinimo
-		}
-		else {
-			return self.calculoNivelDeLucha()
-		}
-	}
-	
-	method calculoNivelDeLucha() {
 		return poderMinimo.max(fuerzaOscura.valor() / 2 * indiceDeOscuridad)
 	}
 	
