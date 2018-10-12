@@ -1,0 +1,20 @@
+import tpRolando.*
+import hechizos.*
+import artefactos.*
+
+describe "test parte 4" {
+	
+	var xenia = new Personaje()
+	var thor = new Personaje()
+	var loki = new Personaje()
+	var alacachula = new HechizoLogo("alacachula cachicomula",1)
+	
+fixture{
+	xenia.hechizoPreferido(alacachula)
+	loki.hechizoPreferido(hechizoBasico)
+	thor.hechizoPreferido(hechizoBasico)
+	// capaz se podria poner un constructor en personaje para el hechizo inicializado
+	
+}
+	
+}
