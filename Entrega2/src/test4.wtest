@@ -16,5 +16,9 @@ fixture{
 	// capaz se podria poner un constructor en personaje para el hechizo inicializado
 	
 }
-	
+
+test "conocer precio de lista de un hechizo logo alacachula" {
+	assert.equals(22,feriaDeHechiceria.precioDeLista(alacachula))
+}	
+
 }

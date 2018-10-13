@@ -2,6 +2,16 @@ import artefactos.*
 import tpRolando.*
 
 
+
+object feriaDeHechiceria{
+	
+
+method precioDeLista(unHechizo){
+	return unHechizo.precio()
+}	
+}
+
+
 class HechizoLogo {
 	var nombre
 	var multiplo

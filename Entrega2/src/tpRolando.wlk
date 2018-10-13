@@ -20,12 +20,22 @@ class Personaje {
 		valorDeBaseParaLucha = unaCantidad
 	}
 		
+    method hechizoPreferido(){
+		return hechizoPreferido
+
 	method hechizoPreferido(unHechizo) {
 		hechizoPreferido = unHechizo
 	}
 
+    method monedas(){
+    	return monedas
+    }
 	method monedas(unasMonedas){
      monedas = unasMonedas
+    }
+    
+    method modificarMonedas(unaCantidad){
+    	monedas = monedas + unaCantidad
     }
 
 	method nivelDeHechiceria() {
@@ -74,6 +84,10 @@ class Personaje {
     var nivel =self.laMejorPertenencia()
     self.agregarArtefacto(espejo)
     return nivel
-}		
+}	
+  method cumplirObjetivo(){
+		monedas = monedas + 10
+	}
+	
 }
 	
