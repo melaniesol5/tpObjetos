@@ -36,7 +36,7 @@ class HechizoLogo {
     method precio(){
 	return self.poder()
    }
-
+}
 object hechizoBasico {
 	
 	method poder() {
@@ -81,6 +81,10 @@ class LibroDeHechizos {
 	method poder() {
 		return hechizos.filter({ hechizo => hechizo.esPoderoso() }).sum({ hechizo => hechizo.poder() })
 	}
+	method precio(){
+		return self.poder() + hechizos.size() *10
+	}
+	
 }
 
 /*pregunta2: ¿Que sucede si el libro de hechizos incluye como hechizo al mismo libro de hechiceria?
