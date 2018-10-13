@@ -8,6 +8,45 @@ class Personaje {
 	var hechizoPreferido
 	var artefactos = []
 	var monedas = 100
+	
+	method canjear(hechizo){
+		if(self.puedeCanjear(hechizo)){
+			
+		   if(!self.leSaleGratis(hechizo)){
+		   monedas-=(hechizoPreferido.precio()/2)
+		   self.hechizoPreferido(hechizo)
+		   } 
+		   else{
+			    self.hechizoPreferido(hechizo)
+			   }	
+		}
+		else{
+			self.error("no tiene suficientes monedas")
+		    }
+		}
+		method puedeCanjear(hechizo){
+			return self.leAlcanza(hechizo)
+		}
+		method leAlcanza(hechizo){
+			return monedas>hechizo.precio()/2
+		}
+		method leSaleGratis(hechizo){
+			return hechizoPreferido.precio()/2 > hechizo.precio()
+		}
+	method comprar(artefacto){
+		if(self.puedeComprar(artefacto)){
+		self.agregarArtefacto(artefacto)
+		monedas-=artefacto.precio()
+		
+		}
+		else{
+			self.error("no tiene suficientes monedas")
+		}
+	}
+	method puedeComprar(artefacto){
+		return monedas>= artefacto.precio()
+	}
+	
 
     method artefactos() {
     	return artefactos
@@ -22,7 +61,7 @@ class Personaje {
 		
     method hechizoPreferido(){
 		return hechizoPreferido
-
+    }
 	method hechizoPreferido(unHechizo) {
 		hechizoPreferido = unHechizo
 	}
