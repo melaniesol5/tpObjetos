@@ -5,6 +5,7 @@ import hechizos.*
 describe "Test Tercer Punto" {
 	
 	var rolando = new Personaje()
+    var espadaDelDestino = new ArmaDeMano()
 	var espectroMalefico = new HechizoLogo("espectro malefico",1)
 	var mascaraOscura = new Mascara(1)
 	var armadura = new Armadura(2,ninguno)

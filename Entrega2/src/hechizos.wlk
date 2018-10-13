@@ -22,8 +22,10 @@ class HechizoLogo {
 	method esPoderoso() {
 		return self.poder() > 15
 	}
-	
-}
+
+    method precio(){
+	return self.poder()
+   }
 
 object hechizoBasico {
 	
@@ -34,7 +36,10 @@ object hechizoBasico {
 	method esPoderoso(){
 		return false 
 	}
-}
+    method precio(){
+  return 10
+  }
+ }  
 
 object fuerzaOscura {
 	var valor = 5

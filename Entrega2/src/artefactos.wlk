@@ -7,9 +7,9 @@ class ArmaDeMano {
 	method nivelDeLucha(unPersonaje) {
 		return nivelDeLucha
 	}
-}
-
-object espadaDelDestino inherits ArmaDeMano {
+    method precio(){
+    return 5 * nivelDeLucha
+  }
 }
 
 
@@ -24,6 +24,9 @@ object collarDivino {
 	method nivelDeLucha(unPersonaje){
 		return  cantidadDePerlas
 	}
+    method precio(){
+  return 2 * cantidadDePerlas
+  }
 }
 
 
@@ -120,4 +123,7 @@ class Espejo {
     		return nivel
 		}
 	}
+   method precio(){
+  return 90
+  }
 }

@@ -4,6 +4,7 @@ import hechizos.*
 
 describe "Test Segundo Punto" {
 	var rolando = new Personaje()
+    var espadaDelDestino = new ArmaDeMano()
 	var mascaraOscura = new Mascara(1)
 	var mascaraOscura2 = new Mascara(0)
 	

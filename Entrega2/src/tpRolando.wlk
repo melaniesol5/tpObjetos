@@ -7,7 +7,8 @@ class Personaje {
 	var valorDeBaseParaLucha = 1
 	var hechizoPreferido
 	var artefactos = []
-	
+	var monedas = 100
+
     method artefactos() {
     	return artefactos
     }
@@ -22,7 +23,11 @@ class Personaje {
 	method hechizoPreferido(unHechizo) {
 		hechizoPreferido = unHechizo
 	}
-	
+
+	method monedas(unasMonedas){
+     monedas = unasMonedas
+    }
+
 	method nivelDeHechiceria() {
 		return (valorDeBaseParaHechiceria * hechizoPreferido.poder() ) + fuerzaOscura.valor()	
 	}
