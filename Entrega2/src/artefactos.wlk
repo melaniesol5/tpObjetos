@@ -108,20 +108,13 @@ object ninguno {
 	}
 }
 
-
-class Espejo {
+object espejo {
 	var nivel
-	
-	method nivelDeLucha(unPersonaje) {	
+	method nivelDeLucha(unPersonaje){	
 		if(unPersonaje.artefactos()==[self]){
 			return 0
 		}
-		else {
-			unPersonaje.removerArtefacto(self)
-    		nivel = unPersonaje.laMejorPertenencia()
-    		unPersonaje.agregarArtefacto(self)
-    		return nivel
-		}
+		return unPersonaje.asignarHabilidadAEspejo()	
 	}
    method precio(){
   return 90

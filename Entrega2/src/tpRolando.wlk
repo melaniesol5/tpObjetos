@@ -66,5 +66,14 @@ class Personaje {
 
 	method estaCargado() {
 		return self.cantidadDeArtefactos() >= 5
-	}		
+
+	}	
+	
+	method asignarHabilidadAEspejo(){
+	self.removerArtefacto(espejo)
+    var nivel =self.laMejorPertenencia()
+    self.agregarArtefacto(espejo)
+    return nivel
+}		
 }
+	
