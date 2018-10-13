@@ -13,7 +13,7 @@ class Personaje {
 		if(self.puedeCanjear(hechizo)){
 			
 		   if(!self.leSaleGratis(hechizo)){
-		   monedas-=(hechizoPreferido.precio()/2)
+		   monedas= monedas-hechizo.precio()+(hechizoPreferido.precio()/2)
 		   self.hechizoPreferido(hechizo)
 		   } 
 		   else{
