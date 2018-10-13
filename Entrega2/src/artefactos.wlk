@@ -61,12 +61,18 @@ class Armadura {
 		refuerzo = unRefuerzo
 	}
 	
+	method refuerzo(){
+		return refuerzo
+	}
 	method refuerzo(unRefuerzo) {
 		refuerzo = unRefuerzo
 	}
 	
-	method nivelDeLucha(unPersonaje) {
+	method nivelDeLucha(unPersonaje) { //es la base de la armadura
 			return nivelDeLucha + refuerzo.unidadesDeLucha(unPersonaje)
+	}
+	method precio(){
+		return refuerzo.precio(self)
 	}
 }
 
@@ -80,12 +86,18 @@ class CotaDeMalla {
 	method unidadesDeLucha(unPersonaje){
 		return unidadesDeLucha
 	}
+	method precio(armadura){
+		return unidadesDeLucha/2
+	}
 }
 
 object bendicion {
 	
 	method unidadesDeLucha(unPersonaje) {
 		return unPersonaje.nivelDeHechiceria()
+	}
+	method precio(armadura){
+		return armadura.nivelDeLucha()
 	}
 }
 
@@ -99,12 +111,18 @@ object hechizo {
 	method unidadesDeLucha(unPersonaje){
 		return elHechizo.poder()
 	}
+	method precio(armadura){
+		return elHechizo.precio() + armadura.nivelDeLucha()
+	}
 }
 
 object ninguno {
 	
 	method unidadesDeLucha(unPersonaje){
 		return 0
+	}
+	method precio(armadura){
+		return 2
 	}
 }
 
