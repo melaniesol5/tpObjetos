@@ -36,7 +36,7 @@ class Personaje {
 	method comprar(artefacto){
 		if(self.puedeComprar(artefacto)){
 		self.agregarArtefacto(artefacto)
-		monedas-=artefacto.precio()
+		monedas-=artefacto.precio(self)
 		
 		}
 		else{
@@ -44,18 +44,13 @@ class Personaje {
 		}
 	}
 	method puedeComprar(artefacto){
-		return monedas>= artefacto.precio()
+		return monedas>= artefacto.precio(self)
 	}
 	
 
     method artefactos() {
     	return artefactos
     }
-
-    method cumplirObjetivo(){
-		monedas = monedas + 10
-	}
-
 	method valorDeBaseParaHechiceria(unaCantidad) {
 		valorDeBaseParaHechiceria = unaCantidad
 	}
@@ -129,7 +124,9 @@ class Personaje {
     self.agregarArtefacto(espejo)
     return nivel
 }	
-  
+  method cumplirObjetivo(){
+		monedas = monedas + 10
+	}
 	
 }
 	

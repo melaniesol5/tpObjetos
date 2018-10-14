@@ -7,7 +7,7 @@ class ArmaDeMano {
 	method nivelDeLucha(unPersonaje) {
 		return nivelDeLucha
 	}
-    method precio(){
+    method precio(unPersonaje){
     return 5 * nivelDeLucha
   }
 }
@@ -24,7 +24,7 @@ object collarDivino {
 	method nivelDeLucha(unPersonaje){
 		return  cantidadDePerlas
 	}
-    method precio(){
+    method precio(unPersonaje){
   return 2 * cantidadDePerlas
   }
 }
@@ -53,11 +53,11 @@ class Mascara {
 }
 	
 class Armadura {
-	var nivelDeLucha
+	var nivelDeLucha=2
 	var refuerzo
 	
-	constructor(unNivelDeLucha,unRefuerzo) {
-		nivelDeLucha = unNivelDeLucha
+	constructor(unRefuerzo) {
+		
 		refuerzo = unRefuerzo
 	}
 	
@@ -71,8 +71,8 @@ class Armadura {
 	method nivelDeLucha(unPersonaje) { //es la base de la armadura
 			return nivelDeLucha + refuerzo.unidadesDeLucha(unPersonaje)
 	}
-	method precio(){
-		return refuerzo.precio(self)
+	method precio(unPersonaje){
+		return refuerzo.precio(self, unPersonaje)
 	}
 }
 
@@ -86,7 +86,7 @@ class CotaDeMalla {
 	method unidadesDeLucha(unPersonaje){
 		return unidadesDeLucha
 	}
-	method precio(armadura){
+	method precio(armadura, unPersonaje){
 		return unidadesDeLucha/2
 	}
 }
@@ -96,8 +96,8 @@ object bendicion {
 	method unidadesDeLucha(unPersonaje) {
 		return unPersonaje.nivelDeHechiceria()
 	}
-	method precio(armadura){
-		return armadura.nivelDeLucha()
+	method precio(armadura, unPersonaje){
+		return ninguno.precio(armadura,unPersonaje)
 	}
 }
 
@@ -111,8 +111,8 @@ object hechizo {
 	method unidadesDeLucha(unPersonaje){
 		return elHechizo.poder()
 	}
-	method precio(armadura){
-		return elHechizo.precio() + armadura.nivelDeLucha()
+	method precio(armadura, unPersonaje){
+		return elHechizo.precio() + ninguno.precio(armadura,unPersonaje)
 	}
 }
 
@@ -121,20 +121,20 @@ object ninguno {
 	method unidadesDeLucha(unPersonaje){
 		return 0
 	}
-	method precio(armadura){
+	method precio(armadura, unPersonaje){
 		return 2
 	}
 }
 
 object espejo {
-	var nivel
+	
 	method nivelDeLucha(unPersonaje){	
 		if(unPersonaje.artefactos()==[self]){
 			return 0
 		}
 		return unPersonaje.asignarHabilidadAEspejo()	
 	}
-   method precio(){
+   method precio(unPersonaje){
   return 90
   }
 }
