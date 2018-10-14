@@ -10,10 +10,10 @@ describe "test parte 4" {
 	var alacachula = new HechizoLogo("alacachula cachicomula",1)
 	var cota1= new CotaDeMalla(5)
 	var espada=new ArmaDeMano()
-	var armaduraSinRefuerzo=new Armadura(2, ninguno)
-	var armaduraConCota=new Armadura(5, cota1)
-	var armaduraConBendicion= new Armadura(2, bendicion)
-	var armaduraConHechizo=new Armadura(2, hechizo)
+	var armaduraSinRefuerzo=new Armadura(ninguno)
+	var armaduraConCota=new Armadura(cota1)
+	var armaduraConBendicion= new Armadura(bendicion)
+	var armaduraConHechizo=new Armadura(hechizo)
 	var libro=new LibroDeHechizos()
 	
 fixture{
