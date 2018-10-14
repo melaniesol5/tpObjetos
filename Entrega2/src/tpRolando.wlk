@@ -36,7 +36,7 @@ class Personaje {
 	method comprar(artefacto){
 		if(self.puedeComprar(artefacto)){
 		self.agregarArtefacto(artefacto)
-		monedas-=artefacto.precio(self)
+		monedas-=artefacto.precio()
 		
 		}
 		else{
@@ -44,7 +44,7 @@ class Personaje {
 		}
 	}
 	method puedeComprar(artefacto){
-		return monedas>= artefacto.precio(self)
+		return monedas>= artefacto.precio()
 	}
 	
 

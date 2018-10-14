@@ -25,6 +25,7 @@ fixture{
 	hechizo.elHechizo(alacachula) //le agrego el hechizo alacachula al objeto hechizo que es un refuerzo
 	libro.agregarHechizo(alacachula)
 	libro.agregarHechizo(hechizoBasico)
+	armaduraConCota.valorDeBase(5)
 }
 
 test "conocer precio de lista de un hechizo logo alacachula" {
