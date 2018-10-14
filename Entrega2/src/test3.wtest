@@ -13,7 +13,7 @@ describe "Test Tercer Punto" {
 	var armaduraExtra = new Armadura(5,cotaDeMalla2)
 	var cotaDeMalla = new CotaDeMalla(1)
 	var libroDeHechizos = new LibroDeHechizos()
-	var espejoFantastico = new Espejo()
+	
 	
 	fixture {
 		
@@ -23,7 +23,7 @@ describe "Test Tercer Punto" {
 		collarDivino.cantidadDePerlas(5)
 		rolando.agregarArtefacto(mascaraOscura)
 		rolando.agregarArtefacto(armadura)
-		rolando.agregarArtefacto(espejoFantastico)
+		rolando.agregarArtefacto(espejo)
 	
 	}
 	
@@ -79,7 +79,7 @@ describe "Test Tercer Punto" {
 	test "Eliminar todos los artefactos de Rolando. Incorporar solamente el espejo. Saber cuál es la habilidad para la lucha de Rolando." {
 		
 		rolando.removerTodosLosArtefactos()
-		rolando.agregarArtefacto(espejoFantastico)
+		rolando.agregarArtefacto(espejo)
 		assert.equals(1,rolando.habilidadParaLaLucha())
 		
 	}
