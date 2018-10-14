@@ -51,6 +51,11 @@ class Personaje {
     method artefactos() {
     	return artefactos
     }
+
+    method cumplirObjetivo(){
+		monedas = monedas + 10
+	}
+
 	method valorDeBaseParaHechiceria(unaCantidad) {
 		valorDeBaseParaHechiceria = unaCantidad
 	}
@@ -124,9 +129,7 @@ class Personaje {
     self.agregarArtefacto(espejo)
     return nivel
 }	
-  method cumplirObjetivo(){
-		monedas = monedas + 10
-	}
+  
 	
 }
 	

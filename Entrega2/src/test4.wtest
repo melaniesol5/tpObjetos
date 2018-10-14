@@ -44,7 +44,7 @@ test "Hacer canjear dos veces a Thor el mismo hechizo basico"{
 	assert.equals(90, thor.monedas())
 }
 test "Loki comienza con 5 monedas. quiere canjear el hechizo por el de alacachula cachicomula del juego de datos"{
-	  assert.notThat(loki.canjear(alacachula))
+	  assert.throwsExceptionWithMessage("no tiene suficientes monedas",{loki.canjear(alacachula)})
 }
 test "Xenia compra una espada, un collar divino(de 5 perlas), una armadura sin refuerzo y armadura con malla de cota cuyo vallor de lucha es 5. Cuantas monedas tiene Xenia"{
 	xenia.comprar(espada)
@@ -66,7 +66,7 @@ test "Thor compra una armadura con bendicion como refuerzo, y una armadura refor
 	assert.equals(74, thor.monedas())
 }
 test "loki quiere comprar el espejo"{
-	assert.notThat(loki.comprar(espejo))
+	assert.throwsExceptionWithMessage("no tiene suficientes monedas", {loki.comprar(espejo)})
 }
 test "Xenia canjea un libro de hechizos que contiene el hechizo de logos de nombre alacachula cachicomula y el hechizo basico. Cuantas monedas le quedan a Xenia"{
 	xenia.canjear(libro)
