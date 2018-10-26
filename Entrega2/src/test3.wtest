@@ -25,6 +25,8 @@ describe "Test Tercer Punto" {
 		rolando.agregarArtefacto(mascaraOscura)
 		rolando.agregarArtefacto(armadura)
 		rolando.agregarArtefacto(espejo)
+		armaduraExtra.valorDeBase(5)
+		
 	
 	}
 	
@@ -99,8 +101,6 @@ describe "Test Tercer Punto" {
 		  Saber cuál es la habilidad para la lucha de Rolando." {
 		
 		rolando.agregarArtefacto(armaduraExtra)
-		armaduraExtra.valorDeBase(5)
-		armaduraExtra.refuerzo(cotaDeMalla2)
 		assert.equals(37,rolando.habilidadParaLaLucha())
 		
 	}
