@@ -125,7 +125,7 @@ object bendicion {
 	}
 }
 
-class hechizo {
+class Hechizo {
 	var elHechizo
 	
 	method elHechizo(unHechizo){
