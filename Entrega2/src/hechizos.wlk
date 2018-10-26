@@ -1,20 +1,18 @@
 import artefactos.*
 import tpRolando.*
 
-
-
 object feriaDeHechiceria{
-	
 
-method precioDeLista(unHechizo){
-	return unHechizo.precio()
-}	
+     method precioDeLista(unHechizo){
+     	return unHechizo.precio()
+     }	
 }
 
 
 class HechizoLogo {
 	var nombre
 	var multiplo
+	var tipo = "hechizo"
 	
 	constructor(unNombre,unMultiplo) {
 		nombre = unNombre
@@ -36,8 +34,13 @@ class HechizoLogo {
     method precio(){
 	return self.poder()
    }
+   
+   method tipo() {
+   	return tipo;
+   }
 }
 object hechizoBasico {
+	var tipo = "hechizo"
 	
 	method poder() {
 		return 10
@@ -46,9 +49,14 @@ object hechizoBasico {
 	method esPoderoso(){
 		return false 
 	}
-    method precio(){
-  return 10
+  
+  method precio(){
+  	return 10
   }
+  
+  method tipo() {
+   	return tipo;
+   }
  }  
 
 object fuerzaOscura {
@@ -69,6 +77,7 @@ object fuerzaOscura {
 
 class LibroDeHechizos {
 	var hechizos=[]
+	var tipo = "hechizo"
 	
 	method agregarHechizo(hechizo) {
 		hechizos.add(hechizo)
@@ -85,6 +94,9 @@ class LibroDeHechizos {
 		return self.poder() + hechizos.size() *10
 	}
 	
+	method tipo() {
+   		return tipo;
+   	}	
 }
 
 /*pregunta2: ¿Que sucede si el libro de hechizos incluye como hechizo al mismo libro de hechiceria?
