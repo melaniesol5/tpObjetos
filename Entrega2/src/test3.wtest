@@ -5,12 +5,13 @@ import hechizos.*
 describe "Test Tercer Punto" {
 	
 	var rolando = new Personaje()
-    var espadaDelDestino = new ArmaDeMano()
+    	var espadaDelDestino = new ArmaDeMano()
 	var espectroMalefico = new HechizoLogo("espectro malefico",1)
 	var mascaraOscura = new Mascara(1)
-	var armadura = new Armadura(2,ninguno)
+	var hechizo = new Hechizo()
+	var armadura = new Armadura(ninguno)
 	var cotaDeMalla2 = new CotaDeMalla(6)
-	var armaduraExtra = new Armadura(5,cotaDeMalla2)
+	var armaduraExtra = new Armadura(cotaDeMalla2)
 	var cotaDeMalla = new CotaDeMalla(1)
 	var libroDeHechizos = new LibroDeHechizos()
 	
@@ -98,6 +99,8 @@ describe "Test Tercer Punto" {
 		  Saber cuál es la habilidad para la lucha de Rolando." {
 		
 		rolando.agregarArtefacto(armaduraExtra)
+		armaduraExtra.valorDeBase(5)
+		armaduraExtra.refuerzo(cotaDeMalla2)
 		assert.equals(37,rolando.habilidadParaLaLucha())
 		
 	}
