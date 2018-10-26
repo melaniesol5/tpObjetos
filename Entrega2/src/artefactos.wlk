@@ -95,10 +95,6 @@ class Armadura {
 		return refuerzo.precio(self)
 	}
 	
-	method nivelDeLuchaSinRefuerzo() {
-		return self.valorDeBase()
-	}
-	
 	method tipo() {
    		return tipo;
    	}
@@ -125,11 +121,11 @@ object bendicion {
 		return unPersonaje.nivelDeHechiceria()
 	}
 	method precio(armadura){
-		return armadura.nivelDeLuchaSinRefuerzo(armadura)
+		return armadura.valorDeBase()
 	}
 }
 
-object hechizo {
+class hechizo {
 	var elHechizo
 	
 	method elHechizo(unHechizo){
@@ -140,7 +136,7 @@ object hechizo {
 		return elHechizo.poder()
 	}
 	method precio(armadura){
-		return elHechizo.precio() + armadura.nivelDeLuchaSinRefuerzo(armadura)
+		return elHechizo.precio() + armadura.valorDeBase()
 	}
 }
 
