@@ -13,6 +13,7 @@ describe "test parte 4" {
 	var armaduraSinRefuerzo=new Armadura(ninguno)
 	var armaduraConCota=new Armadura(cota1)
 	var armaduraConBendicion= new Armadura(bendicion)
+	var hechizo = new Hechizo()
 	var armaduraConHechizo=new Armadura(hechizo)
 	var libro=new LibroDeHechizos()
 	
