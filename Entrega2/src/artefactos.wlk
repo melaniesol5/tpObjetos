@@ -2,37 +2,47 @@ import tpRolando.*
 import hechizos.*
 
 class ArmaDeMano {
-	var nivelDeLucha = 3
+    var tipo = "artefacto"
 	
-	method nivelDeLucha(unPersonaje) {
-		return nivelDeLucha
-	}
-    method precio(){
-    return 5 * nivelDeLucha
-  }
+    method nivelDeLucha(unPersonaje) {
+    	return 3
+    }
+    
+    method precio() {
+    	return 5 * 3
+    }
+    
+    method tipo() {
+   	return tipo;
+   }
 }
 
-
 object collarDivino {
-	var cantidadDePerlas 
+     var cantidadDePerlas
+     var tipo = "artefacto"
 	
+     method cantidadDePerlas(unaCantidad) {
+     	cantidadDePerlas = unaCantidad
+     }
 
-	method cantidadDePerlas(unaCantidad){
-   		cantidadDePerlas = unaCantidad
-  	}
-
-	method nivelDeLucha(unPersonaje){
-		return  cantidadDePerlas
-	}
-    method precio(){
-  return 2 * cantidadDePerlas
-  }
+     method nivelDeLucha(unPersonaje) {
+	return  cantidadDePerlas
+     }
+    
+     method precio() {
+  	return 2 * cantidadDePerlas
+     }
+     
+     method tipo() {
+   	return tipo;
+   }
 }
 
 
 class Mascara {
 	var indiceDeOscuridad
 	var poderMinimo = 4
+	var tipo = "artefacto"
 	
 	constructor(unIndiceDeOscuridad) {
 		if (unIndiceDeOscuridad.between(0,1)) {
@@ -50,11 +60,16 @@ class Mascara {
 	method poderMinimo(unValor) {
 		poderMinimo = unValor
 	}
+	
+	method tipo() {
+   		return tipo;
+   	}
 }
 	
 class Armadura {
 	var valorDeBase=2
 	var refuerzo
+	var tipo = "artefacto"
 	
 	constructor(unRefuerzo) {
 		
@@ -79,6 +94,14 @@ class Armadura {
 	method precio(){
 		return refuerzo.precio(self)
 	}
+	
+	method nivelDeLuchaSinRefuerzo() {
+		return self.valorDeBase()
+	}
+	
+	method tipo() {
+   		return tipo;
+   	}
 }
 
 class CotaDeMalla {
@@ -102,7 +125,7 @@ object bendicion {
 		return unPersonaje.nivelDeHechiceria()
 	}
 	method precio(armadura){
-		return ninguno.precio(armadura)
+		return armadura.nivelDeLuchaSinRefuerzo(armadura)
 	}
 }
 
@@ -117,7 +140,7 @@ object hechizo {
 		return elHechizo.poder()
 	}
 	method precio(armadura){
-		return elHechizo.precio() + ninguno.precio(armadura)
+		return elHechizo.precio() + armadura.nivelDeLuchaSinRefuerzo(armadura)
 	}
 }
 
@@ -132,14 +155,19 @@ object ninguno {
 }
 
 object espejo {
-	
-	method nivelDeLucha(unPersonaje){	
-		if(unPersonaje.artefactos()==[self]){
-			return 0
-		}
-		return unPersonaje.asignarHabilidadAEspejo()	
+     var tipo = "artefacto"
+
+     method nivelDeLucha(unPersonaje){	
+	if(unPersonaje.artefactos()==[self]){
+		return 0
 	}
-   method precio(){
-  return 90
-  }
+	return unPersonaje.asignarHabilidadAEspejo()	
+     }
+     method precio(){
+     	return 90
+     }
+     
+     method tipo() {
+   	return tipo;
+     }
 }
