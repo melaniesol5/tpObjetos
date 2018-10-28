@@ -1,15 +1,20 @@
 import artefactos.*
 import tpRolando.*
 
-object feriaDeHechiceria{
 
-     method precioDeLista(unHechizo){
-     	return unHechizo.precio()
-     }	
+
+
+class Hechiceria {
+	
+  method poder() 
+	
+  method esPoderoso() {
+		return self.poder() > 15
+	}
+	
 }
 
-
-class HechizoLogo {
+class HechizoLogo inherits Hechiceria {
 	var nombre
 	var multiplo
 	var tipo = "hechizo"
@@ -23,13 +28,10 @@ class HechizoLogo {
 		nombre = otroNombre
 	}
 	
-	method poder() {
+	override method poder() {
 		return nombre.size() * multiplo 
 	}
 	
-	method esPoderoso() {
-		return self.poder() > 15
-	}
 
     method precio(){
 	return self.poder()
@@ -39,24 +41,40 @@ class HechizoLogo {
    	return tipo;
    }
 }
-//Entrega 3
-class HechizoComercial inherits HechizoLogo{
-	var porcentaje
+
+class HechizoComercial inherits Hechiceria {
+	
+	var nombre = "el hechizo comercial"
+	var multiplo = 2
 	
 	
-	constructor(unNombre,unMultiplo,_porcentaje)=super(unNombre,unMultiplo){
-		
-		porcentaje=_porcentaje
-		
+	method nombre(unNombre) {
+		nombre = unNombre
 	}
 	
-	method porcentaje(){
-		return porcentaje
+	method multiplo(unValor) {
+		multiplo = unValor
 	}
 	
-	override method poder(){
-		return (nombre.size()*porcentaje)/100
+	override method poder() {
+		return  multiplo * self.porcentajeNombre() * self.cantidadDeLetrasDelNombre()
 	}
+	
+	method porcentajeNombre() {
+		return  self.cantidadDeLetrasDelNombre()/100
+	}
+	
+	method cantidadDeLetrasDelNombre(){
+		return nombre.size()
+	}
+	
+	
+}
+
+
+
+
+
 }
 object hechizoBasico {
 	var tipo = "hechizo"
