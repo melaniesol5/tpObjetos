@@ -102,7 +102,9 @@ class LibroDeHechizos {
 	
 	method soyHechizo() {
    		return true;
-   	}	
+   	}
+   	method pesoTotal(unPersonaje)=0
+   	
 }
 
 /*pregunta2: ¿Que sucede si el libro de hechizos incluye como hechizo al mismo libro de hechiceria?

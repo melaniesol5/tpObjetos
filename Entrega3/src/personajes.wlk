@@ -8,6 +8,8 @@ var valorDeBaseParaLucha = 1
 var hechizoPreferido
 var artefactos = []
 var monedas = 100
+const cargaMaxima=0 
+
 	
     method comprar(algo){
     	if(self.leAlcanza(algo)){
@@ -69,7 +71,15 @@ var monedas = 100
 	}
 	
 	method agregarArtefacto(unArtefacto) {
-		artefactos.add(unArtefacto)
+		if((unArtefacto.pesoTotal(self)+ self.cargaAcumulada())< cargaMaxima){
+			artefactos.add(unArtefacto)
+		}else{
+			throw new Exception("No se puede agregar el artefacto")
+		}
+		
+	}
+	method cargaAcumulada(){
+		return artefactos.map({artefacto=>artefacto.pesoTotal(self)}).sum()
 	}
 
 	method removerArtefacto(unArtefacto) {
