@@ -1,0 +1,49 @@
+import tpRolando.*
+import hechizos.*
+
+
+describe "Tests Primer Punto (Regresion)"{
+	
+	var espectroMalefico = new HechizoLogo("espectro malefico",1)
+	var rolando = new Personaje()
+	
+	fixture {
+		rolando.hechizoPreferido(espectroMalefico)
+	}
+
+test "El Nivel De Hechiceria de rolando es 56 " {
+	assert.equals(56,rolando.nivelDeHechiceria())
+}
+
+test "Al cambiar el nombre de espectro maléfico(espectro superrecontramalefico muajajaja), el nivel de 
+hechiceria de Rolando es 125 "{
+	espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
+	assert.equals(125,rolando.nivelDeHechiceria())
+}
+
+test "Cambiar el hechizo preferido de Rolando por el hechizo basico , su nivel de hechiceria es 35" {
+  	rolando.hechizoPreferido(hechizoBasico)
+	assert.equals(35,rolando.nivelDeHechiceria())
+
+}
+
+test "Cuando ocurre un eclipse, el nivel de hechiceria de Rolando es es 61" {
+    fuerzaOscura.eclipse()
+	assert.equals(61,rolando.nivelDeHechiceria())
+
+}
+
+test "El espectro malefico (creado con la clase HechizoLogo) es poderoso" {
+	assert.that(espectroMalefico.esPoderoso())
+}
+
+test "Al cambiar el nombre del espectro malefico a pepe , el espectro malefico no es poderoso "{
+    espectroMalefico.nombre("pepe")
+	assert.notThat(espectroMalefico.esPoderoso())
+}
+
+test "El hechizo basico no es poderoso" {
+	assert.notThat(hechizoBasico.esPoderoso())
+}
+
+}

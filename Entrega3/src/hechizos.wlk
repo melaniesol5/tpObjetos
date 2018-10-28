@@ -1,83 +1,52 @@
-import artefactos.*
-import tpRolando.*
 
-
-
-
-class Hechiceria {
+class Hechizo {
+	var property nombre
+	var property multiplo
 	
-  method poder() 
-	
-  method esPoderoso() {
-		return self.poder() > 15
+	constructor(_n,_m){
+		nombre=_n
+		multiplo=_m
 	}
-	
-}
 
-class HechizoLogo inherits Hechiceria {
-	var nombre
-	var multiplo
-	var tipo = "hechizo"
-	
-	constructor(unNombre,unMultiplo) {
-		nombre = unNombre
-		multiplo = unMultiplo
-	}
-	
-	method nombre(otroNombre) {
-		nombre = otroNombre
-	}
-	
-	override method poder() {
-		return nombre.size() * multiplo 
-	}
-	
-
+	 method poder()
     method precio(){
 	return self.poder()
    }
+   method esPoderoso(){
+   	return self.poder()>15
+   }
    
-   method tipo() {
-   	return tipo;
+   method soyHechizo() {
+   	return true;
    }
 }
 
-class HechizoComercial inherits Hechiceria {
+class HechizoLogo inherits Hechizo{
 	
-	var nombre = "el hechizo comercial"
-	var multiplo = 2
-	
-	
-	method nombre(unNombre) {
-		nombre = unNombre
+	override method poder(){
+		return nombre.size()*multiplo
 	}
-	
-	method multiplo(unValor) {
-		multiplo = unValor
-	}
-	
-	override method poder() {
-		return  multiplo * self.porcentajeNombre() * self.cantidadDeLetrasDelNombre()
-	}
-	
-	method porcentajeNombre() {
-		return  self.cantidadDeLetrasDelNombre()/100
-	}
-	
-	method cantidadDeLetrasDelNombre(){
-		return nombre.size()
-	}
-	
-	
 }
+class HechizoComercial inherits Hechizo {
 
+	var property porcentaje
+	
+	constructor(_n,_m, unPorcentaje)= super(_n,_m){
 
-
-
-
+		porcentaje=unPorcentaje
+	}
+	method porcentajeDeSuNombre(){
+		return nombre.size()*porcentaje/100
+	}
+	 override method poder() {
+		return  multiplo* self.porcentajeDeSuNombre()
+	}
+	
+	
+	
 }
 object hechizoBasico {
-	var tipo = "hechizo"
+	
 	
 	method poder() {
 		return 10
@@ -91,8 +60,8 @@ object hechizoBasico {
   	return 10
   }
   
-  method tipo() {
-   	return tipo;
+  method soyHechizo() {
+   	return true;
    }
  }  
 
@@ -115,7 +84,6 @@ object fuerzaOscura {
 
 class LibroDeHechizos {
 	var hechizos=[]
-	var tipo = "hechizo"
 	
 	method agregarHechizo(hechizo) {
 		hechizos.add(hechizo)
@@ -132,8 +100,8 @@ class LibroDeHechizos {
 		return self.poder() + hechizos.size() *10
 	}
 	
-	method tipo() {
-   		return tipo;
+	method soyHechizo() {
+   		return true;
    	}	
 }
 
