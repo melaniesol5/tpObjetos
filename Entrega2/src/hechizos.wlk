@@ -12,7 +12,7 @@ object feriaDeHechiceria{
 class HechizoLogo {
 	var nombre
 	var multiplo
-	var tipo = "hechizo"
+	
 	
 	constructor(unNombre,unMultiplo) {
 		nombre = unNombre
@@ -35,12 +35,12 @@ class HechizoLogo {
 	return self.poder()
    }
    
-   method tipo() {
-   	return tipo;
+   method soyHechizo() {
+   	return true;
    }
 }
 object hechizoBasico {
-	var tipo = "hechizo"
+	
 	
 	method poder() {
 		return 10
@@ -54,8 +54,8 @@ object hechizoBasico {
   	return 10
   }
   
-  method tipo() {
-   	return tipo;
+  method soyHechizo() {
+   	return true;
    }
  }  
 
@@ -77,7 +77,7 @@ object fuerzaOscura {
 
 class LibroDeHechizos {
 	var hechizos=[]
-	var tipo = "hechizo"
+	
 	
 	method agregarHechizo(hechizo) {
 		hechizos.add(hechizo)
@@ -94,8 +94,8 @@ class LibroDeHechizos {
 		return self.poder() + hechizos.size() *10
 	}
 	
-	method tipo() {
-   		return tipo;
+	method soyHechizo() {
+   		return true;
    	}	
 }
 

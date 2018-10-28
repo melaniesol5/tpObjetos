@@ -2,7 +2,7 @@ import tpRolando.*
 import hechizos.*
 
 class ArmaDeMano {
-    var tipo = "artefacto"
+
 	
     method nivelDeLucha(unPersonaje) {
     	return 3
@@ -12,14 +12,14 @@ class ArmaDeMano {
     	return 5 * 3
     }
     
-    method tipo() {
-   	return tipo;
+    method soyHechizo() {
+   	return false;
    }
 }
 
 object collarDivino {
      var cantidadDePerlas
-     var tipo = "artefacto"
+     
 	
      method cantidadDePerlas(unaCantidad) {
      	cantidadDePerlas = unaCantidad
@@ -33,8 +33,8 @@ object collarDivino {
   	return 2 * cantidadDePerlas
      }
      
-     method tipo() {
-   	return tipo;
+     method soyHechizo() {
+   	return false;
    }
 }
 
@@ -42,7 +42,7 @@ object collarDivino {
 class Mascara {
 	var indiceDeOscuridad
 	var poderMinimo = 4
-	var tipo = "artefacto"
+	
 	
 	constructor(unIndiceDeOscuridad) {
 		if (unIndiceDeOscuridad.between(0,1)) {
@@ -61,15 +61,15 @@ class Mascara {
 		poderMinimo = unValor
 	}
 	
-	method tipo() {
-   		return tipo;
+	method soyHechizo() {
+   		return false;
    	}
 }
 	
 class Armadura {
 	var valorDeBase=2
 	var refuerzo
-	var tipo = "artefacto"
+	
 	
 	constructor(unRefuerzo) {
 		
@@ -95,8 +95,9 @@ class Armadura {
 		return refuerzo.precio(self)
 	}
 	
-	method tipo() {
-   		return tipo;
+	
+	method soyHechizo() {
+   		return false;
    	}
 }
 
@@ -151,19 +152,16 @@ object ninguno {
 }
 
 object espejo {
-     var tipo = "artefacto"
-
      method nivelDeLucha(unPersonaje){	
-	if(unPersonaje.artefactos()==[self]){
+	  if(unPersonaje.artefactos()==[self]){
 		return 0
-	}
-	return unPersonaje.asignarHabilidadAEspejo()	
-     }
+	  }
+	    return unPersonaje.asignarHabilidadAEspejo()	
+      }
      method precio(){
      	return 90
      }
-     
-     method tipo() {
-   	return tipo;
+     method soyHechizo(){
+     	return false
      }
 }

@@ -9,43 +9,27 @@ var hechizoPreferido
 var artefactos = []
 var monedas = 100
 	
-     method canjear(hechizo){
-     	if(self.puedeAdquirir(hechizo)){
-     		if(!self.leSaleGratis(hechizo)){
-			monedas= monedas-hechizo.precio()+(hechizoPreferido.precio()/2)
-		   	self.hechizoPreferido(hechizo)
-		} 
-		else {
-			self.hechizoPreferido(hechizo)
-		}	
-	}
-	else {
-		self.error("no tiene suficientes monedas")
-	}
-     }
-		
-     method puedeAdquirir(unArticulo) {
-	if(unArticulo.tipo() == "hechizo") {
-		return self.monedas() >= unArticulo.precio() / 2
-	}
-	else {
-		return self.monedas() >= unArticulo.precio()
-	}
-     }
-		
-     method leSaleGratis(hechizo){
-		return hechizoPreferido.precio()/2 > hechizo.precio()
-     }
-		
-     method comprar(artefacto){
-	if(self.puedeAdquirir(artefacto)){
-		self.agregarArtefacto(artefacto)
-		monedas-=artefacto.precio()
-	}
-	else{
-		self.error("no tiene suficientes monedas")
-	}
-     }
+    method comprar(algo){
+    	if(self.leAlcanza(algo)){
+    		if(algo.soyHechizo()){
+    		monedas-=0.max(algo.precio()-hechizoPreferido.precio()/2)
+		   	self.hechizoPreferido(algo)
+		   	}else{
+		   		self.agregarArtefacto(algo)
+		    monedas-=algo.precio()
+		   	}
+    	}else{
+    		self.error("no tiene suficientes monedas")
+        }
+    
+    }
+    
+    method leAlcanza(algo){
+    	if(algo.soyHechizo()){
+    		return self.monedas() >= algo.precio() / 2
+    	}
+    	return self.monedas() >= algo.precio()
+    }
 
     method artefactos() {
     	return artefactos

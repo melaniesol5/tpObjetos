@@ -27,26 +27,27 @@ fixture{
 	libro.agregarHechizo(alacachula)
 	libro.agregarHechizo(hechizoBasico)
 	armaduraConCota.valorDeBase(5)
+	
 }
 
 test "conocer precio de lista de un hechizo logo alacachula" {
 	assert.equals(22,alacachula.precio())
 }	
 test " xenia canjea el hechizo por un hechizo basico. saber cuantas monedas le quedan"{
-	xenia.canjear(hechizoBasico)
+	xenia.comprar(hechizoBasico)
 	assert.equals(100, xenia.monedas())
 }
 test "Thor canjea el hechizo por el hechizo de logos alacachula cachicomula del juego de datos. Cuantas monedas le quedan a Thor"{
-	thor.canjear(alacachula)
+	thor.comprar(alacachula)
 	assert.equals(83, thor.monedas())
 }
 test "Hacer canjear dos veces a Thor el mismo hechizo basico"{
-	thor.canjear(hechizoBasico)
-	thor.canjear(hechizoBasico)
+	thor.comprar(hechizoBasico)
+	thor.comprar(hechizoBasico)
 	assert.equals(90, thor.monedas())
 }
 test "Loki comienza con 5 monedas. quiere canjear el hechizo por el de alacachula cachicomula del juego de datos"{
-	  assert.throwsExceptionWithMessage("no tiene suficientes monedas",{loki.canjear(alacachula)})
+	  assert.throwsExceptionWithMessage("no tiene suficientes monedas",{loki.comprar(alacachula)})
 }
 test "Xenia compra una espada, un collar divino(de 5 perlas), una armadura sin refuerzo y armadura con malla de cota cuyo vallor de lucha es 5. Cuantas monedas tiene Xenia"{
 	xenia.comprar(espada)
@@ -71,7 +72,7 @@ test "loki quiere comprar el espejo"{
 	assert.throwsExceptionWithMessage("no tiene suficientes monedas", {loki.comprar(espejo)})
 }
 test "Xenia canjea un libro de hechizos que contiene el hechizo de logos de nombre alacachula cachicomula y el hechizo basico. Cuantas monedas le quedan a Xenia"{
-	xenia.canjear(libro)
+	xenia.comprar(libro)
 	assert.equals(69, xenia.monedas())
 }
 }
