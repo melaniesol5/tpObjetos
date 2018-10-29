@@ -124,7 +124,7 @@ class Armadura inherits Artefacto{
    		return false;
    	}
    	override method pesoTotal(){
-   		return refuerzo.peso()
+   		return super()+refuerzo.peso()
    	}
 }
 
