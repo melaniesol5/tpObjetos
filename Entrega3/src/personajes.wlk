@@ -8,7 +8,21 @@ var valorDeBaseParaLucha = 1
 var hechizoPreferido
 var artefactos = []
 var monedas = 100
-const cargaMaxima=0 
+const cargaMaxima 
+
+constructor(_artefactos){
+	artefactos=_artefactos
+	hechizoPreferido= hechizoBasico
+	cargaMaxima=300
+}
+constructor(_h, cm){
+	hechizoPreferido=_h
+	cargaMaxima=cm
+}
+constructor(){
+	hechizoPreferido= hechizoBasico
+	cargaMaxima=300
+}
 
 	
     method comprar(algo){
@@ -126,6 +140,16 @@ const cargaMaxima=0
 class PersonajeNoControlado inherits Personaje{
 	var property nivel
 	
+	constructor(_h,cm,n)=super(_h,cm){
+		nivel=n
+	}
+	constructor(_a,n)=super(_a){
+		nivel=n
+	}
+	constructor(n)=super(){
+		nivel=n
+	}
+	
 	override method habilidadParaLaLucha(){
 		return super()* nivel.multiplicador()
 	}
@@ -146,3 +170,4 @@ object dificil{
 		return 4
 	}
 }
+
