@@ -9,7 +9,7 @@ var hechizoPreferido
 var artefactos = []
 var monedas = 100
 var property comerciante
-const cargaMaxima 
+const property cargaMaxima 
 
 constructor(_artefactos, m, cm){
 	artefactos=_artefactos
@@ -101,7 +101,7 @@ constructor(a){
 	}
 	
 	method agregarArtefacto(unArtefacto) {
-		if((unArtefacto.pesoTotal()+ self.cargaAcumulada())< cargaMaxima){
+		if((unArtefacto.pesoTotal() + self.cargaAcumulada())< cargaMaxima){
 			artefactos.add(unArtefacto)
 		}else{
 			throw new Exception("No se puede agregar el artefacto")
@@ -109,7 +109,7 @@ constructor(a){
 		
 	}
 	method cargaAcumulada(){
-		return artefactos.map({artefacto=>artefacto.pesoTotal(self)}).sum()
+		return artefactos.map({artefacto=>artefacto.pesoTotal()}).sum()
 	}
 
 	method removerArtefacto(unArtefacto) {
@@ -141,7 +141,7 @@ constructor(a){
 
 	}	
 	
-	method asignarHabilidadAEspejo(){
+	method asignarHabilidadAEspejo(espejo){
 	self.removerArtefacto(espejo)
     var nivel =self.laMejorPertenencia()
     self.agregarArtefacto(espejo)
