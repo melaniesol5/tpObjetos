@@ -24,7 +24,7 @@ class ArmaDeMano inherits Artefacto {
     	return 3
     }
     method precio() {
-    	return 5 * 3
+    	return 5 * self.pesoTotal()
     }
     
     method soyHechizo() {
@@ -87,6 +87,9 @@ class Mascara inherits Artefacto{
 			return super() + 0.max(self.nivelDeLucha(null)-3) 
 		}
 		return super()
+	}
+	method precio(){
+		return 10*indiceDeOscuridad
 	}
 }
 	

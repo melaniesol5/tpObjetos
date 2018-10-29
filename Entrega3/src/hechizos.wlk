@@ -1,5 +1,5 @@
 
-class Hechizo {
+class Hechizos {
 	var property nombre
 	var property multiplo
 	
@@ -19,16 +19,17 @@ class Hechizo {
    method soyHechizo() {
    	return true;
    }
+   method pesoTotal()=0
 }
 
-class HechizoLogo inherits Hechizo{
+class HechizoLogo inherits Hechizos{
 	
 	override method poder(){
 		return nombre.size()*multiplo
 	}
 }
-class HechizoComercial inherits Hechizo {
-
+class HechizoComercial inherits Hechizos {
+    
 	var property porcentaje
 	
 	constructor(_n,_m, unPorcentaje)= super(_n,_m){
@@ -36,7 +37,7 @@ class HechizoComercial inherits Hechizo {
 		porcentaje=unPorcentaje
 	}
 	method porcentajeDeSuNombre(){
-		return nombre.size()*porcentaje/100
+		return (nombre.size()*porcentaje)/100
 	}
 	 override method poder() {
 		return  multiplo* self.porcentajeDeSuNombre()
@@ -57,7 +58,7 @@ object hechizoBasico {
 	}
   
   method precio(){
-  	return 10
+  	return self.poder()
   }
   
   method soyHechizo() {
@@ -103,7 +104,7 @@ class LibroDeHechizos {
 	method soyHechizo() {
    		return true;
    	}
-   	method pesoTotal(unPersonaje)=0
+   	
    	
 }
 
