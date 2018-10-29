@@ -22,15 +22,18 @@ describe "test punto 2: pesos de los artefactos"{
 	var armaduraImpar = new Armadura(12,fechaDeHoy,hechizo1)
 	var armaduraSinRefuerzo = new Armadura(12,fechaDeHoy,ninguno)
 	var merlin=new Personaje(100,10)
-	var ursula=new Personaje(100,[mascaraOscura,armaduraConCota], 200)
+	var ursula=new Personaje(100, 200)
 	var mockHnos=new ComercianteRegistrado()
-	
+    var collar=new CollarDivino(0,fechaDeHoy)
 	
 	fixture{
 		mascaraOscura.poderMinimo(1)
 		mascaraClara.poderMinimo(0)
 		hechizo.elHechizo(alacachula)
 		hechizo1.elHechizo(alacachula1)
+		merlin.comerciante(mockHnos)
+		ursula.agregarArtefacto(mascaraOscura)
+		ursula.agregarArtefacto(armaduraConCota)
 	}
 	test"saber el peso de la espada vieja"{
 		assert.equals(6,espadaVieja.pesoTotal())
@@ -42,7 +45,7 @@ describe "test punto 2: pesos de los artefactos"{
 		assert.equals(4.95,espadaComun.pesoTotal())
 	}
 	test"saber el peso del collar divino"{
-	  assert.equals(2.5, collarDivino.pesoTotal())
+	  assert.equals(2.5, collar.pesoTotal())
 	  }
 	test"saber el peso de la mascara oscura"{
 		assert.equals(3, mascaraOscura.pesoTotal())
@@ -66,8 +69,22 @@ describe "test punto 2: pesos de los artefactos"{
 	test"saber cual es el peso total de la armadura sin ningun tipo de refuerzo"{
 		assert.equals(12,armaduraSinRefuerzo.pesoTotal())
 	}
-	/*test"Merlin le compra a mockHnos la mascara clara y la mascara oscura(sin que haya eclipse).Saber cual es el peso total que carga Merlin"{}
-	test"Merlin le quiere compra a mockHnos la armadura con hechizo par"{}
-	test"Ursula carga con 14 kilos iniciales(11 de la armadura con cota de malla y 3 de la mascara oscura). Decide desprenderse de la armadura con cota de malla.Saber cual es el peso total con el que carga ursula ahora"
-	*/
+	test"Merlin le compra a mockHnos la mascara clara y la mascara oscura(sin que haya eclipse).Saber cual es el peso total que carga Merlin"{
+		
+		merlin.comprarAComerciante(mascaraClara)
+		merlin.comprarAComerciante(mascaraOscura)
+		assert.equals(5,merlin.cargaAcumulada())
+	}
+	test"Merlin le quiere compra a mockHnos la armadura con hechizo par"{
+
+		assert.throwsExceptionWithMessage("No se puede agregar el artefacto"  ,{merlin.comprarAComerciante(armaduraPar)})
+		
+	}
+	test"Ursula carga con 14 kilos iniciales(11 de la armadura con cota de malla y 3 de la mascara oscura). Decide desprenderse de la armadura con cota de malla.Saber cual es el peso total con el que carga ursula ahora"{
+		ursula.removerArtefacto(armaduraConCota)
+		assert.equals(3,ursula.cargaAcumulada())
+		
+		}
+	}
+	
 	}
