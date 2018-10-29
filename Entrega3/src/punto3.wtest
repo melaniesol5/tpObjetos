@@ -1,0 +1,26 @@
+import personajes.*
+import hechizos.*
+import artefactos.*
+
+describe "test punto 3: Personajes no controlados"{
+	var navi=new PersonajeNoControlado(facil)
+	const fechaDeHoy=new Date()
+	var mascaraClara = new Mascara(2,fechaDeHoy,0)
+	var ashleyGraham=new PersonajeNoControlado([mascaraClara],moderado)
+	
+	fixture{
+		ashleyGraham.valorDeBaseParaLucha(5)
+		
+	}
+	
+	test"conocer la habilidad para la lucha de navi"{
+		assert.equals(1, navi.habilidadParaLaLucha())
+	}
+	test"conocer la habilidad para la lucha de Ashley Graham"{
+		assert.equals(18, ashleyGraham.habilidadParaLaLucha())
+	}
+	test"Hacer que ashley Graham tenga dificultad dificil. Conocer la habilidad para la lucha de ashley Graham"{
+		ashleyGraham.nivel(dificil)
+		assert.equals(36, ashleyGraham.habilidadParaLaLucha())
+	}
+}
