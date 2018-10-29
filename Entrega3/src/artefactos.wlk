@@ -18,6 +18,9 @@ class Artefacto{
 	method diasDesdeCompra(){
 		return fechaHoy - fechaDeCompra
 	}
+	 method soyHechizo() {
+   	return false;
+   }
 }
 class ArmaDeMano inherits Artefacto {
     method nivelDeLucha(unPersonaje) {
@@ -25,15 +28,10 @@ class ArmaDeMano inherits Artefacto {
     }
     method precio() {
     	return 5 * self.pesoTotal()
-    }
-    
-    method soyHechizo() {
-   	return false;
-   }
-   
+    }  
 }
 
-object collarDivino {
+class CollarDivino inherits Artefacto{
      var cantidadDePerlas=5
      
      
@@ -49,10 +47,8 @@ object collarDivino {
   	return 2 * cantidadDePerlas
      }
      
-     method soyHechizo() {
-   	return false;
-   }
-   method pesoTotal()= 0.5 * cantidadDePerlas
+    
+   override method pesoTotal()=super()+ 0.5 * cantidadDePerlas
 }
 
 
@@ -71,16 +67,14 @@ class Mascara inherits Artefacto{
 	}
 	
 	method nivelDeLucha(unPersonaje) {
-		return poderMinimo.max(fuerzaOscura.valor() / 2 * indiceDeOscuridad)
+		return poderMinimo.min(fuerzaOscura.valor() / 2 * indiceDeOscuridad)
 	}
 	
 	method poderMinimo(unValor) {
 		poderMinimo = unValor
 	}
 	
-	method soyHechizo() {
-   		return false;
-   	}
+	
    	override method pesoTotal(){
    		
    	if(indiceDeOscuridad != 0){
@@ -122,10 +116,6 @@ class Armadura inherits Artefacto{
 		return refuerzo.precio(self)
 	}
 	
-	
-	method soyHechizo() {
-   		return false;
-   	}
    	override method pesoTotal(){
    		return super()+refuerzo.peso()
    	}
@@ -193,18 +183,17 @@ object ninguno {
 	method peso()=0
 }
 
-object espejo inherits Artefacto(peso, fechaDeCompra){
+
+class Espejo inherits Artefacto {
      method nivelDeLucha(unPersonaje){	
 	  if(unPersonaje.artefactos()==[self]){
 		return 0
 	  }
-	    return unPersonaje.asignarHabilidadAEspejo()	
+	    return unPersonaje.asignarHabilidadAEspejo(self)	
       }
      method precio(){
      	return 90
      }
-     method soyHechizo(){
-     	return false
-     }
+    
      
 }
