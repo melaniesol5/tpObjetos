@@ -1,11 +1,16 @@
 import hechizos.*
 
 class Artefacto{
-	var peso
-	var fechaDeCompra
+	var property peso
+	var property fechaDeCompra
 	const fechaHoy=new Date()
-	method pesoTotal(unPersonaje){
-		return peso-self.factorDeCorreccion()
+	
+	constructor(_peso,_fechaDeCompra){
+		peso=_peso
+		fechaDeCompra=_fechaDeCompra
+	}
+	method pesoTotal(){
+		return self.peso()-self.factorDeCorreccion()
 	}
 	method factorDeCorreccion(){
 		return 1.min(self.diasDesdeCompra()/1000)
@@ -25,11 +30,13 @@ class ArmaDeMano inherits Artefacto {
     method soyHechizo() {
    	return false;
    }
-   override method pesoTotal(unPersonaje)= 0
+   
 }
 
-object collarDivino inherits Artefacto{
-     var cantidadDePerlas
+object collarDivino {
+     var cantidadDePerlas=5
+     
+     
      method cantidadDePerlas(unaCantidad) {
      	cantidadDePerlas = unaCantidad
      }
@@ -45,7 +52,7 @@ object collarDivino inherits Artefacto{
      method soyHechizo() {
    	return false;
    }
-   override method pesoTotal(unPersonaje)= super(unPersonaje)+0.5*cantidadDePerlas
+   method pesoTotal()= 0.5 * cantidadDePerlas
 }
 
 
@@ -54,7 +61,7 @@ class Mascara inherits Artefacto{
 	var poderMinimo = 4
 	
 	
-	constructor(unIndiceDeOscuridad) {
+	constructor(_peso,_fechaDeCompra, unIndiceDeOscuridad)=super(_peso,_fechaDeCompra) {
 		if (unIndiceDeOscuridad.between(0,1)) {
 			indiceDeOscuridad = unIndiceDeOscuridad
 		}
@@ -74,12 +81,12 @@ class Mascara inherits Artefacto{
 	method soyHechizo() {
    		return false;
    	}
-   	override method pesoTotal(unPersonaje){
+   	override method pesoTotal(){
    		
    	if(indiceDeOscuridad != 0){
-			return super(unPersonaje) + 0.max(self.nivelDeLucha(unPersonaje)-3) 
+			return super() + 0.max(self.nivelDeLucha(null)-3) 
 		}
-		return super(unPersonaje)
+		return super()
 	}
 }
 	
@@ -88,7 +95,7 @@ class Armadura inherits Artefacto{
 	var refuerzo
 	
 	
-	constructor(unRefuerzo) {
+	constructor(_p,_f,unRefuerzo)=super(_p,_f) {
 		
 		refuerzo = unRefuerzo
 	}
@@ -116,7 +123,7 @@ class Armadura inherits Artefacto{
 	method soyHechizo() {
    		return false;
    	}
-   	override method pesoTotal(unPersonaje){
+   	override method pesoTotal(){
    		return refuerzo.peso()
    	}
 }
@@ -183,7 +190,7 @@ object ninguno {
 	method peso()=0
 }
 
-object espejo inherits Artefacto{
+object espejo inherits Artefacto(peso, fechaDeCompra){
      method nivelDeLucha(unPersonaje){	
 	  if(unPersonaje.artefactos()==[self]){
 		return 0
@@ -196,5 +203,5 @@ object espejo inherits Artefacto{
      method soyHechizo(){
      	return false
      }
-     override method pesoTotal(unPersonaje)=0
+     
 }
