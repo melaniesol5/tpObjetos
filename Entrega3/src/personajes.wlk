@@ -8,18 +8,26 @@ var valorDeBaseParaLucha = 1
 var hechizoPreferido
 var artefactos = []
 var monedas = 100
+var property comerciante
 const cargaMaxima 
 
-constructor(_artefactos){
+constructor(_artefactos, m, cm){
 	artefactos=_artefactos
+	monedas=m
 	hechizoPreferido= hechizoBasico
-	cargaMaxima=300
+	cargaMaxima=cm
 }
-constructor(_h, cm){
-	hechizoPreferido=_h
+constructor(m, cm){
+	monedas=m
+	hechizoPreferido=hechizoBasico
 	cargaMaxima=cm
 }
 constructor(){
+	hechizoPreferido= hechizoBasico
+	cargaMaxima=300
+}
+constructor(a){
+	artefactos=a
 	hechizoPreferido= hechizoBasico
 	cargaMaxima=300
 }
@@ -45,6 +53,14 @@ constructor(){
     		return self.monedas() >= algo.precio() / 2
     	}
     	return self.monedas() >= algo.precio()
+    }
+    method comprarAComerciante(artefacto){
+    	if(monedas >= comerciante.precioConImpuesto(artefacto)){
+			self.agregarArtefacto(artefacto)
+			monedas-= comerciante.precioConImpuesto(artefacto)
+		}else{
+			self.error("No puede Comprar el artefacto")
+		}
     }
 
     method artefactos() {
@@ -85,7 +101,7 @@ constructor(){
 	}
 	
 	method agregarArtefacto(unArtefacto) {
-		if((unArtefacto.pesoTotal(self)+ self.cargaAcumulada())< cargaMaxima){
+		if((unArtefacto.pesoTotal()+ self.cargaAcumulada())< cargaMaxima){
 			artefactos.add(unArtefacto)
 		}else{
 			throw new Exception("No se puede agregar el artefacto")
@@ -140,10 +156,13 @@ constructor(){
 class PersonajeNoControlado inherits Personaje{
 	var property nivel
 	
-	constructor(_h,cm,n)=super(_h,cm){
+	constructor(a,m,cm,n)=super(a,m,cm){
 		nivel=n
 	}
-	constructor(_a,n)=super(_a){
+	constructor(m,cm,n)=super(m,cm){
+		nivel=n
+	}
+	constructor(a,n)=super(a){
 		nivel=n
 	}
 	constructor(n)=super(){
@@ -171,3 +190,55 @@ object dificil{
 	}
 }
 
+class Comerciante{
+	method precioConImpuesto(artefacto)
+	method recategorizar()
+	method precioBaseArtefacto(artefacto) = artefacto.precio()
+}
+class ComercianteIndependiente inherits Comerciante{
+	const comision
+	constructor(_comision) {
+          comision = _comision
+    }
+	override method precioConImpuesto(artefacto){
+		return self.precioBaseArtefacto(artefacto)*(1 + comision/100)
+	}
+	override method recategorizar(){
+		if ((comision * 2) > 21 ){
+			return new ComercianteRegistrado() 
+		}
+		else{
+			return new ComercianteIndependiente(comision*2)
+		}
+	}
+}
+
+class ComercianteRegistrado inherits Comerciante{
+	const iva = 21
+	override method precioConImpuesto(artefacto){
+		return self.precioBaseArtefacto(artefacto)*(1 + iva/100)
+	}
+	override method recategorizar(){
+		return new ComercianteImpuestoALasGanancias(5)
+	}
+}
+
+class ComercianteImpuestoALasGanancias inherits Comerciante{
+	const minimoNoImponible
+	constructor(_minimoNoImponible) {
+          minimoNoImponible = _minimoNoImponible
+    }	
+	override method precioConImpuesto(artefacto){
+		if(artefacto.precio() < minimoNoImponible){
+			return self.precioBaseArtefacto(artefacto)
+		}else{
+			return self.precioBaseArtefacto(artefacto) + self.diferenciaImportes(artefacto)*(35/100)
+		}	
+	}
+	method diferenciaImportes(artefacto){
+		return (self.precioBaseArtefacto(artefacto)-minimoNoImponible)
+	}
+	override method recategorizar(){
+		return new ComercianteImpuestoALasGanancias(minimoNoImponible)
+	}
+}
