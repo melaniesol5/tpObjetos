@@ -1,0 +1,68 @@
+import personajes.*
+import hechizos.*
+import artefactos.*
+
+describe "test punto 2: pesos de los artefactos"{
+	
+	const fechaDeHoy=new Date()
+	const fechaEspadaVieja=new Date(7,5,2006)
+	const fechaHace50Dias = new Date().minusDays(50)
+	var espadaVieja = new ArmaDeMano(7,fechaEspadaVieja)
+	var espadaNueva = new ArmaDeMano(4,fechaDeHoy)
+	var espadaComun = new ArmaDeMano(5,fechaHace50Dias)
+	var mascaraOscura = new Mascara(3,fechaDeHoy,1)
+	var mascaraClara = new Mascara(2,fechaDeHoy,0)
+	var cotaDeMalla = new CotaDeMalla(5)
+	var armaduraConCota= new Armadura(10,fechaDeHoy,cotaDeMalla)
+	var alacachula=new HechizoLogo("alacachula cachicomula", 1)
+	var alacachula1=new HechizoLogo("alacachula cachicomul", 1)
+	var hechizo=new Hechizo()
+	var hechizo1=new Hechizo()
+	var armaduraPar = new Armadura(12,fechaDeHoy, hechizo)
+	var armaduraImpar = new Armadura(12,fechaDeHoy,hechizo1)
+	var armaduraSinRefuerzo = new Armadura(12,fechaDeHoy,ninguno)
+	
+	
+	fixture{
+		mascaraOscura.poderMinimo(1)
+		mascaraClara.poderMinimo(0)
+		hechizo.elHechizo(alacachula)
+		hechizo1.elHechizo(alacachula1)
+	}
+	test"saber el peso de la espada vieja"{
+		assert.equals(6,espadaVieja.pesoTotal())
+	}
+	test"saber el peso de la espada nueva"{
+		assert.equals(4,espadaNueva.pesoTotal())
+	}
+	test"saber el peso de la espada comun"{
+		assert.equals(4.95,espadaComun.pesoTotal())
+	}
+	test"saber el peso del collar divino"{
+	  assert.equals(2.5, collarDivino.pesoTotal())
+	  }
+	test"saber el peso de la mascara oscura"{
+		assert.equals(3, mascaraOscura.pesoTotal())
+	}
+	test"hacer que ocurra un eclipse, saber el peso de la mascara oscura"{
+		fuerzaOscura.eclipse()
+		assert.equals(5,mascaraOscura.pesoTotal())
+	}
+	test"saber el peso de la mascara clara"{
+		assert.equals(2,mascaraClara.pesoTotal())
+	}
+	test"saber cual es el peso total de la armadura con cota de malla"{
+	 assert.equals(11,armaduraConCota.pesoTotal())
+	 }
+	test"saber cual es el peso total de la armadura con hechizo par"{
+		assert.equals(14,armaduraPar.pesoTotal())
+	}
+	test"saber cual es el peso total de la armadura con hechizo impar"{
+		assert.equals(13,armaduraImpar.pesoTotal())
+	}
+	test"saber cual es el peso total de la armadura sin ningun tipo de refuerzo"{
+		assert.equals(12,armaduraSinRefuerzo.pesoTotal())
+	}
+	
+	
+	}
