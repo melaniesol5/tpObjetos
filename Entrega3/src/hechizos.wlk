@@ -1,5 +1,5 @@
 
-class Hechizos {
+class Hechizo {
 	var property nombre
 	var property multiplo
 	
@@ -22,13 +22,13 @@ class Hechizos {
    method pesoTotal()=0
 }
 
-class HechizoLogo inherits Hechizos{
+class HechizoLogo inherits Hechizo{
 	
 	override method poder(){
 		return nombre.size()*multiplo
 	}
 }
-class HechizoComercial inherits Hechizos {
+class HechizoComercial inherits Hechizo {
     
 	var property porcentaje
 	

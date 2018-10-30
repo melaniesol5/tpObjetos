@@ -67,7 +67,7 @@ class Mascara inherits Artefacto{
 	}
 	
 	method nivelDeLucha(unPersonaje) {
-		return poderMinimo.min(fuerzaOscura.valor() / 2 * indiceDeOscuridad)
+		return poderMinimo.max(fuerzaOscura.valor() / 2 * indiceDeOscuridad)
 	}
 	
 	method poderMinimo(unValor) {
@@ -148,7 +148,7 @@ object bendicion {
 	method peso()=0
 }
 
-class Hechizo {
+class RefuerzoHechizo {
 	var elHechizo
 	
 	method elHechizo(unHechizo){
