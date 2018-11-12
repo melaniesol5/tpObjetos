@@ -18,9 +18,7 @@ class Artefacto{
 	method diasDesdeCompra(){
 		return fechaHoy - fechaDeCompra
 	}
-	 method soyHechizo() {
-   	return false;
-   }
+
 }
 class ArmaDeMano inherits Artefacto {
     method nivelDeLucha(unPersonaje) {

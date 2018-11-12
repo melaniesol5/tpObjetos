@@ -15,10 +15,7 @@ class Hechizo {
    method esPoderoso(){
    	return self.poder()>15
    }
-   
-   method soyHechizo() {
-   	return true;
-   }
+
    method pesoTotal()=0
 }
 
@@ -61,9 +58,7 @@ object hechizoBasico {
   	return self.poder()
   }
   
-  method soyHechizo() {
-   	return true;
-   }
+
  }  
 
 object fuerzaOscura {
@@ -100,10 +95,7 @@ class LibroDeHechizos {
 	method precio(){
 		return self.poder() + hechizos.size() *10
 	}
-	
-	method soyHechizo() {
-   		return true;
-   	}
+
    	
    	
 }
