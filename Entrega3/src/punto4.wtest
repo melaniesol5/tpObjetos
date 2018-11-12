@@ -4,9 +4,9 @@ import artefactos.*
 
 describe "test punto 4:Comercio avanzado de artefactos"{
 
-	var pastoriza= new ComercianteIndependiente(9)
-	var prieto=new ComercianteRegistrado()
-	var fermepin= new ComercianteImpuestoALasGanancias(5)
+	var pastoriza= new Comerciante()
+	var prieto=new Comerciante()
+	var fermepin= new Comerciante()
 	const fechaDeHoy=new Date()
 	var cotaDeMalla = new CotaDeMalla(5)
 	var armaduraConCota= new Armadura(10,fechaDeHoy,cotaDeMalla)
@@ -16,48 +16,51 @@ describe "test punto 4:Comercio avanzado de artefactos"{
 	
 	fixture{
 		mascaraOscura.poderMinimo(1)
+		comercianteIndependiente.comision(9)
+		pastoriza.tipoImpositivo(comercianteIndependiente)
+		prieto.tipoImpositivo(comercianteRegistrado)
+		minimoNoImponible.minimo(5)
+		fermepin.tipoImpositivo(comercianteImpuestoALasGanancias)
 		
-		
-		ursula.comerciante(pastoriza)
 	}
 	
 	test"ursula comienza con 100 monedas, luego compra la mascara oscura a pastoriza"{
-		ursula.comerciante(pastoriza)
-		ursula.comprarAComerciante(mascaraOscura)
+		
+		ursula.comprarAComerciante(mascaraOscura,pastoriza)
 		assert.equals(89.1,ursula.monedas())
 		
 	}
 	test"ursula comienza con 100 monedas, luego compra la mascara oscura a prieto"{
-		ursula.comerciante(prieto)
-		ursula.comprarAComerciante(mascaraOscura)
+		
+		ursula.comprarAComerciante(mascaraOscura, prieto)
 		assert.equals(87.9,ursula.monedas())
 	  }
 	test"ursula comienza con 100 monedas, luego compra la mascara oscura a fermepin"{
-		ursula.comerciante(fermepin)
-		ursula.comprarAComerciante(mascaraOscura)
+		
+		ursula.comprarAComerciante(mascaraOscura, fermepin)
 		assert.equals(88.25,ursula.monedas())
 	}
 	test"recategorizar a Pastoriza, hacer que ursula le compre la mascara oscura a pastoriza"{
 		pastoriza.recategorizar()
-		ursula.comprarAComerciante(mascaraOscura)
+		ursula.comprarAComerciante(mascaraOscura, pastoriza)
 		assert.equals(88.2,ursula.monedas())
 	}
 	test"recategorizar dos veces a pastoriza, hacer que ursula le compre la mascara oscura a pastoriza"{
 		pastoriza.recategorizar()
 		pastoriza.recategorizar()
-		ursula.comprarAComerciante(mascaraOscura)
+		ursula.comprarAComerciante(mascaraOscura, pastoriza)
 		assert.equals(87.9,ursula.monedas())
 	}
 	test"recategorizar a prieto, hacer que ursula le compre la mascara oscura a pastoriza"{
 		prieto.recategorizar()
-		ursula.comerciante(prieto)
-		ursula.comprarAComerciante(mascaraOscura)
+		
+		ursula.comprarAComerciante(mascaraOscura, prieto)
 		assert.equals(88.25,ursula.monedas())
 	}
 	test"recategoria a fermepin, hacer que ursula le compre la mascara oscura a pastoriza"{
 		fermepin.recategorizar()
-		ursula.comerciante(fermepin)
-		ursula.comprarAComerciante(mascaraOscura)
+		
+		ursula.comprarAComerciante(mascaraOscura, fermepin)
 		assert.equals(88.25,ursula.monedas())
 	}
 	
