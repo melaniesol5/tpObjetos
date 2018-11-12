@@ -8,7 +8,6 @@ var valorDeBaseParaLucha = 1
 var hechizoPreferido
 var artefactos = []
 var monedas = 100
-var property comerciante
 const property cargaMaxima 
 
 constructor(_artefactos, m, cm){
@@ -32,37 +31,38 @@ constructor(a){
 	cargaMaxima=300
 }
 
-	
-    method comprar(algo){
-    	if(self.leAlcanza(algo)){
-    		if(algo.soyHechizo()){
-    		monedas-=0.max(algo.precio()-hechizoPreferido.precio()/2)
-		   	self.hechizoPreferido(algo)
-		   	}else{
-		   		self.agregarArtefacto(algo)
-		    monedas-=algo.precio()
-		   	}
+	method comprarArtefacto(artefacto){
+			self.debitar(artefacto.precio())
+			self.agregarArtefacto(artefacto)
+	}
+	method comprarHechizo(hechizo){
+			self.debitar(0.max(hechizo.precio()-hechizoPreferido.precio()/2))
+			self.hechizoPreferido(hechizo)
+	}
+    
+    method debitar(unaCantidad){
+    	if(monedas>unaCantidad){
+    		monedas-=unaCantidad
     	}else{
     		self.error("no tiene suficientes monedas")
-        }
-    
-    }
-    
-    method leAlcanza(algo){
-    	if(algo.soyHechizo()){
-    		return self.monedas() >= algo.precio() / 2
     	}
-    	return self.monedas() >= algo.precio()
+    	
     }
-    method comprarAComerciante(artefacto){
-    	if(monedas >= comerciante.precioConImpuesto(artefacto)){
+   
+	
+	method comprarAComerciante(artefacto,comerciante){
+		if(self.puedeComprarArtefactoAComerciante(artefacto,comerciante)){
 			self.agregarArtefacto(artefacto)
-			monedas-= comerciante.precioConImpuesto(artefacto)
+			monedas = monedas - comerciante.precioConImpuesto(artefacto)
 		}else{
-			self.error("No puede Comprar el artefacto")
+			throw new Exception("No puede Comprar el artefacto")
 		}
-    }
+	}
+	method puedeComprarArtefactoAComerciante(artefacto,comerciante) { 
+		return monedas >= comerciante.precioConImpuesto(artefacto)
+	}
 
+	
     method artefactos() {
     	return artefactos
     }
@@ -191,54 +191,56 @@ object dificil{
 }
 
 class Comerciante{
-	method precioConImpuesto(artefacto)
-	method recategorizar()
-	method precioBaseArtefacto(artefacto) = artefacto.precio()
+	var property tipoImpositivo
+	method precioConImpuesto(artefacto)=tipoImpositivo.precioConImpuesto(artefacto)
+	method recategorizar(){
+		tipoImpositivo.recategorizar(self)
+	}
 }
-class ComercianteIndependiente inherits Comerciante{
-	const comision
-	constructor(_comision) {
-          comision = _comision
-    }
-	override method precioConImpuesto(artefacto){
+
+object comercianteIndependiente{
+	var property comision
+	method precioConImpuesto(artefacto){
 		return self.precioBaseArtefacto(artefacto)*(1 + comision/100)
 	}
-	override method recategorizar(){
+	method precioBaseArtefacto(artefacto) = artefacto.precio()
+	method recategorizar(comerciante){
 		if ((comision * 2) > 21 ){
-			return new ComercianteRegistrado() 
+			comerciante.tipoImpositivo(comercianteRegistrado)
 		}
 		else{
-			return new ComercianteIndependiente(comision*2)
+			comision*=2
 		}
 	}
 }
 
-class ComercianteRegistrado inherits Comerciante{
+object comercianteRegistrado{
 	const iva = 21
-	override method precioConImpuesto(artefacto){
+	method precioConImpuesto(artefacto){
 		return self.precioBaseArtefacto(artefacto)*(1 + iva/100)
 	}
-	override method recategorizar(){
-		return new ComercianteImpuestoALasGanancias(5)
+	method precioBaseArtefacto(artefacto) = artefacto.precio()
+	method recategorizar(comerciante){
+		comerciante.tipoImpositivo(comercianteImpuestoALasGanancias)
 	}
 }
 
-class ComercianteImpuestoALasGanancias inherits Comerciante{
-	const minimoNoImponible
-	constructor(_minimoNoImponible) {
-          minimoNoImponible = _minimoNoImponible
-    }	
-	override method precioConImpuesto(artefacto){
-		if(artefacto.precio() < minimoNoImponible){
+object comercianteImpuestoALasGanancias{
+	method precioConImpuesto(artefacto){
+		if(artefacto.precio() < minimoNoImponible.minimo()){
 			return self.precioBaseArtefacto(artefacto)
 		}else{
 			return self.precioBaseArtefacto(artefacto) + self.diferenciaImportes(artefacto)*(35/100)
 		}	
 	}
 	method diferenciaImportes(artefacto){
-		return (self.precioBaseArtefacto(artefacto)-minimoNoImponible)
+		return (self.precioBaseArtefacto(artefacto)-minimoNoImponible.minimo())
 	}
-	override method recategorizar(){
-		return new ComercianteImpuestoALasGanancias(minimoNoImponible)
-	}
+	method precioBaseArtefacto(artefacto) = artefacto.precio()
+	method recategorizar(comerciante){}
+}
+
+object minimoNoImponible{
+	var property minimo
+	
 }
