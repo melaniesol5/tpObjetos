@@ -4,24 +4,20 @@ class Pirata {
 	
 var energiaInicial
 
-
-constructor(unaEnergiaInicial){
+constructor(unaEnergiaInicial) {
 	energiaInicial = unaEnergiaInicial
 }
 
-method energiaInicial(){
+method poderDeMando()
+
+method seHirio()
+
+method energiaInicial() {
 	return energiaInicial
 }	
 
-method poderDeMando()
-
-
-method aumentarEnergia(unaCantidad) {
-	energiaInicial = energiaInicial + unaCantidad
-}
-
-method disminuirEnergia(unaCantidad){
-	energiaInicial = energiaInicial - unaCantidad
+method disminuirEnergia(unaCantidad) {
+	energiaInicial -= unaCantidad
 }
 
 method tipo()
@@ -34,41 +30,46 @@ class Guerrero inherits Pirata {
 var poderDePelea
 var vitalidad
 
-constructor(unaEnergiaInicial,unPoderDePelea,unaVitalidad) = super(unaEnergiaInicial){
+constructor(unaEnergiaInicial,unPoderDePelea,unaVitalidad) = super(unaEnergiaInicial) {
 	poderDePelea = unPoderDePelea
 	vitalidad = unaVitalidad
 }
 
-override method poderDeMando(){
+override method poderDeMando() {
 	return poderDePelea * vitalidad
 }
 	
-override method tipo(){
+override method tipo() {
 	return "guerrero"
+}
+
+override method seHirio(unValor) {
+	poderDePelea *= unValor
 }
 
 }
 
 class Navegador inherits Pirata {
 	
-
-	
 var inteligencia
-
 
 constructor(unaEnergiaInicial,unaInteligencia) = super(unaEnergiaInicial){
 	inteligencia = unaInteligencia
 }	
 
-override method poderDeMando(){
+override method poderDeMando() {
 	return inteligencia * inteligencia
 }	
 
-override  method tipo(){
+override  method tipo() {
 	return "navegador"
 }
+
+override method seHirio(unValor) {
+	inteligencia *= unValor
 }
 
+}
 
 class Cocinero inherits Pirata {
  
@@ -98,31 +99,22 @@ method entregarIngredienteA(unPirata){
 	unPirata.recibirIngrediente(ingrediente)
 	ingredientes.remove(ingrediente)
 }
-	
+
+override method seHirio(unValor) {
+	moral *= unValor
 }
 
+}
 
 object jackSparrow inherits Pirata (500) {
-
-
 	
-var poderDePelea 	
-var inteligencia
+var property poderDePelea 	
+var property inteligencia
 var ingredientes = []
-
-
-method poderDePelea(unPoderDePelea){
-	poderDePelea = unPoderDePelea
-	
-}
-method inteligencia(unaInteligencia){
-	inteligencia = unaInteligencia
-}
 
 method ingredientes(unosIngredientes){
 	ingredientes = unosIngredientes
 }
-
 
 override method poderDeMando(){
 	return energiaInicial * poderDePelea * inteligencia 
@@ -135,9 +127,8 @@ override method tipo(){
 method tomarRonCon(unPirata){
 	self.aumentarEnergia(100)
 	unPirata.disminuirEnergia(50)
-	
-	if(unPirata.tipo() == "cocinero"){
-	unPirata.entregarIngrediente() 
+	if(unPirata.tipo() == "cocinero") {
+		unPirata.entregarIngrediente(self) 
 	}
 }
 
@@ -145,10 +136,11 @@ method recibirIngrediente(unIngrediente){
 	ingredientes.add(unIngrediente)
 }
 
+method aumentarEnergia(unaCantidad) {
+	energiaInicial = energiaInicial + unaCantidad
+}
 	
 }
-
-
 
 /*------------------------------ BARCOS------------------------------------- */
 
