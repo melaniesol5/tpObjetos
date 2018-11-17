@@ -1,0 +1,63 @@
+import barcos.*
+import piratas.*
+import bandos.*
+
+describe "" {
+	
+	//Piratas
+	var calamardo = new Guerrero(70,40,20)
+	var patricio = new Navegador(90,10)
+	var bobEsponja = new Guerrero(100,60,50)
+	var holandesVolador = new Guerrero(200,150,100)
+	var garfio = new Guerrero(100,20,30)
+	var nails = new Cocinero(80,50,["jamon","pimienta","limon"])
+	var barbaNegra = new Guerrero(120,100,80)
+	//Bandos
+	var unionPirata = new UnionPirata()
+	var holandesErrante = new HolandesErrante()
+	var armadaInglesa = new ArmadaInglesa()
+	//Barcos
+	var shanghaied = new Barco(100,150,100,[calamardo,patricio,bobEsponja,holandesVolador],holandesErrante)
+	var perlaNegra = new Barco(80,100,60,[jackSparrow,garfio,nails,barbaNegra],unionPirata)
+	
+	fixture {
+		jackSparrow.energia(500)
+		jackSparrow.poderDePelea(200)
+		jackSparrow.inteligencia(300)
+		shanghaied.tripulacion().forEach({ tripulante => tripulante.poderDeMando() })
+		perlaNegra.tripulacion().forEach({ tripulante => tripulante.poderDeMando() })
+	}
+	
+	test "Determinar el capitan en los barcos Shanghaied y Perla Negra " {
+		shanghaied.elegirCapitan()
+		perlaNegra.elegirCapitan()
+		assert.equals(jackSparrow,perlaNegra.capitan())
+		assert.equals(holandesVolador,shanghaied.capitan())
+	}
+	
+	test "El Perla Negra ataca a al barco Shanghaied" {
+		perlaNegra.enftrentarBarco(shanghaied)
+		assert.equals([],shanghaied.tripulacion())
+		// En esta ocasion el shangeid pierde
+	}
+	
+	test "El Perla Negra dispara 70 canionazos" {
+		assert.throwsExceptionWithMessage("El barco no posee suficientes municiones para atacar...", { perlaNegra.dispararCanionazos(70,shanghaied) })
+	}
+
+	test "El Perla Negra dispara 50 canionazos" {
+		perlaNegra.dispararCanionazos(50,shanghaied)
+		assert.equals(10,perlaNegra.municiones())
+		assert.equals(50,shanghaied.resistencia())
+	}
+	
+	test "Aplicar el bonus del bando Holandes Errante para el barco shanghaied" {
+		shanghaied.aplicarBonus()
+		assert.equals(8,shanghaied.tripulacion().size())
+	}
+	
+	test "Cambiar de bando a armada inglesa para el barco Perla Negra" {
+		perlaNegra.cambiarDeBando(armadaInglesa)
+		assert.equals(armadaInglesa,perlaNegra.bando())
+	}
+}

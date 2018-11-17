@@ -1,0 +1,34 @@
+import piratas.*
+
+describe "" {
+	var garfio = new Guerrero(100,20,30)
+	var nails = new Cocinero(80,50,["jamon","pimienta","limon"])
+	
+	fixture {
+		jackSparrow.energia(500)
+		jackSparrow.poderDePelea(200)
+		jackSparrow.inteligencia(300)
+	}
+	
+	test "Determinar el poder de mando de un pirata (garfio)" {
+		assert.equals(600,garfio.poderDeMando())
+	}
+	
+	test "Calcular el poder de mando de Jack Sparrow" {
+		assert.equals(30000000,jackSparrow.poderDeMando())
+	}
+	
+	test "Jack toma ron con otro pirata (Garfio) aumentando la energiade Jack en 100 pero la de Garfio disminuye en 50" {
+		jackSparrow.tomarRonCon(garfio)
+		assert.equals(50,garfio.energia())
+	}
+	
+	
+	// revisar para que el cocinera elimine el elemento que le robaron
+	test "Jack toma ron con otro pirata (nails) aumentando la energia de Jack en 100 pero la de nails disminuye en 50 y ademas Jack le roba
+		  un ingrediente al azar" {
+		jackSparrow.tomarRonCon(nails)
+		assert.equals(30,nails.energia())
+		assert.equals(2,jackSparrow.cantidadDeIngredientes())
+	}
+}
