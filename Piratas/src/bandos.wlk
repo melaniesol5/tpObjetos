@@ -1,20 +1,20 @@
 import barcos.*
 
-class ArmadaInglesa {
+object armadaInglesa {
 	
 	method bonus(unBarco) {
 		unBarco.aumentarMuniciones(unBarco.municiones() * 0.3)
 	}
 }
 
-class UnionPirata {
+object unionPirata {
 	
 	method bonus(unBarco) {
 		unBarco.aumentarPoderDeFuego(60)
 	}
 }
 
-class HolandesErrante {
+object holandesErrante {
 	
 	method bonus(unBarco) {
 		unBarco.duplicarTripulacion()

@@ -10,7 +10,7 @@ constructor(unaEnergiaInicial) {
 
 method poderDeMando()
 
-method seHirio()
+method seHirio(unValor)
 
 method energiaInicial() {
 	return energiaInicial
@@ -124,6 +124,11 @@ override method tipo(){
 	return "unico"
 }
 
+override method seHirio(unValor){
+  poderDePelea *= unValor
+  inteligencia *= unValor
+}
+
 method tomarRonCon(unPirata){
 	self.aumentarEnergia(100)
 	unPirata.disminuirEnergia(50)
@@ -138,6 +143,29 @@ method recibirIngrediente(unIngrediente){
 
 method aumentarEnergia(unaCantidad) {
 	energiaInicial = energiaInicial + unaCantidad
+}
+
+class Humanoide inherits Pirata {
+	var poderDePelea
+	
+constructor(unaEnergiaInicial,unPoderDePelea) = super(unaEnergiaInicial){
+	poderDePelea = unPoderDePelea
+}		
+
+override method  poderDeMando() {
+	return poderDePelea
+}
+
+override method tipo(){
+	return "humanoide"
+	
+}
+override method seHirio(unValor){
+	poderDePelea *= unValor
+	
+}
+
+	
 }
 	
 }
