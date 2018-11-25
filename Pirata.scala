@@ -1,24 +1,29 @@
 import scala.util.Random
 
-abstract class Pirata () {
-  var energiaInicial = 0
+abstract class Pirata() {
+  var _energiaInicial = 0
 
   def poderDeMando(): Double
 
   def seHirio(unValor : Double): Unit
 
   def disminuirEnergia(unValor : Int): Unit = {
-    energiaInicial -= unValor
+    _energiaInicial -= unValor
   }
 
   def tomarRonConJackSparrow(): Unit = {
     this.disminuirEnergia(50)
   }
+
+  def energiaInicial_(unValor: Int):Unit = {
+    _energiaInicial = unValor
+  }
+
+  def energiaInicial: Int = _energiaInicial
+
 }
 
-class Guerrero extends Pirata {
-  var poderDePelea : Double = 0
-  var vitalidad : Double = 0
+class Guerrero(var poderDePelea: Double, var vitalidad: Double) extends Pirata{
 
   override def poderDeMando(): Double = {
     poderDePelea * vitalidad
@@ -29,8 +34,7 @@ class Guerrero extends Pirata {
   }
 }
 
-class Navegante extends Pirata() {
-  var inteligencia: Double = 0
+class Navegante(var inteligencia: Double) extends Pirata {
 
   override def poderDeMando(): Double = {
     inteligencia * inteligencia
@@ -42,15 +46,12 @@ class Navegante extends Pirata() {
 
 }
 
-class Cocinero extends Pirata() {
-  var moral: Double = 0
-  var listaDeIngredientes : List[String] = List[String]()
+class Cocinero(var moral: Double, var listaDeIngredientes: List[String]) extends Pirata {
 
   override def poderDeMando(): Double = {
     moral * listaDeIngredientes.length
   }
 
-  
   override def tomarRonConJackSparrow(): Unit = {
     this.disminuirEnergia(50)
     this.entregarIngredienteA()
@@ -72,17 +73,17 @@ class Cocinero extends Pirata() {
 }
 
 object jackSparrow extends Pirata {
-  var poderDePelea : Double = 500
-  var inteligencia : Double = 300
-  var ingredientes = List("")
+  var _poderDePelea : Double = 0
+  var _inteligencia : Double = 0
+  var _ingredientes = List("")
 
   override def poderDeMando(): Double = {
-    poderDePelea * inteligencia * ingredientes.length
+    _poderDePelea * _inteligencia * _energiaInicial
   }
 
   override def seHirio(unValor: Double): Unit = {
-    poderDePelea *= unValor
-    inteligencia *= unValor
+    _poderDePelea *= unValor
+    _inteligencia *= unValor
   }
 
   def tomarRonCon(unPirata : Pirata): Unit = {
@@ -90,24 +91,46 @@ object jackSparrow extends Pirata {
     unPirata.tomarRonConJackSparrow()
   }
 
-  
   def aumentarEnergia(unValor : Int): Unit = {
-    energiaInicial += unValor
+    _energiaInicial += unValor
   }
 
   def recibirIngrediente(unIngrediente : String): Unit = {
-    ingredientes = unIngrediente :: ingredientes
+    _ingredientes = unIngrediente :: _ingredientes
   }
+
+  //Setter
+  def poderDePelea_(unValor: Double): Unit = {
+    _poderDePelea = unValor
+  }
+
+  //Getter
+  def poderDePelea: Double = _poderDePelea
+
+  //Setter
+  def inteligencia_(unValor: Double): Unit = {
+    _inteligencia = unValor
+  }
+
+  //Getter
+  def inteligencia: Double = _inteligencia
+
+  //Setter
+  def ingredientes_(unaLista: List[String]): Unit = {
+    _ingredientes = unaLista
+  }
+
+  //Getter
+  def ingredientes: List[String] = _ingredientes
+
 }
 
-class Humanoide extends Pirata {
-  var poderDePelea : Double = 0
+class Humanoide(var poderDePelea: Double) extends Pirata {
 
   override def poderDeMando(): Double = {
-    energiaInicial * poderDePelea
+    _energiaInicial * poderDePelea
   }
 
-  
   override def seHirio(unValor: Double): Unit = {
     poderDePelea *= unValor
   }
@@ -118,13 +141,7 @@ class Humanoide extends Pirata {
 // Clase Barco
 //----------------------------------------------------------------------------------------------------------------------
 
-class Barco {
-  var resistencia = 0
-  var poderDefuego = 0
-  var municiones: Double = 0
-  var tripulacion: List[Pirata] = List[Pirata]()
-  var capitan : Pirata = _
-  var bando : Bando = _
+class Barco(var resistencia: Int, var poderDeFuego: Int, var municiones: Double, var tripulacion: List[Pirata], var capitan: Pirata, var bando: Bando) {
 
   def elegirCapitan(): Unit = {
     capitan = tripulacion.maxBy(unPirata => unPirata.poderDeMando())
@@ -158,7 +175,7 @@ class Barco {
   def vaciarBarcoEnemigo(otroBarco: Barco): Unit = {
     otroBarco.resistencia = 0
     otroBarco.municiones = 0
-    otroBarco.poderDefuego = 0
+    otroBarco.poderDeFuego = 0
     otroBarco.capitan = null
     otroBarco.tripulacion = List()
   }
@@ -189,11 +206,11 @@ class Barco {
   }
 
   def eliminarTripulacion(): Unit = {
-    tripulacion = tripulacion.filter(unPirata => unPirata.energiaInicial > 20)
+    tripulacion = tripulacion.filter(unPirata => unPirata._energiaInicial > 20)
   }
 
   def aumentarPoderDeFuego(unValor : Int): Unit = {
-    poderDefuego += unValor
+    poderDeFuego += unValor
   }
 
   def aumentarMuniciones(unValor : Double): Unit = {
@@ -210,7 +227,7 @@ class Barco {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// Clase Bandos
+// Interfaz Bandos
 //----------------------------------------------------------------------------------------------------------------------
 
 trait Bando {
