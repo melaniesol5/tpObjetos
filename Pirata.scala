@@ -5,8 +5,6 @@ abstract class Pirata () {
 
   def poderDeMando(): Double
 
-  def tipo(): String
-
   def seHirio(unValor : Double): Unit
 
   def disminuirEnergia(unValor : Int): Unit = {
@@ -26,10 +24,6 @@ class Guerrero extends Pirata {
     poderDePelea * vitalidad
   }
 
-  override def tipo(): String = {
-    "guerrero"
-  }
-
   override def seHirio(unValor : Double): Unit = {
     poderDePelea *= unValor
   }
@@ -40,10 +34,6 @@ class Navegante extends Pirata() {
 
   override def poderDeMando(): Double = {
     inteligencia * inteligencia
-  }
-
-  override def tipo(): String = {
-    "navegador"
   }
 
   override def seHirio(unValor: Double): Unit = {
@@ -60,10 +50,7 @@ class Cocinero extends Pirata() {
     moral * listaDeIngredientes.length
   }
 
-  override def tipo(): String = {
-    "cocinero"
-  }
-
+  
   override def tomarRonConJackSparrow(): Unit = {
     this.disminuirEnergia(50)
     this.entregarIngredienteA()
@@ -103,10 +90,7 @@ object jackSparrow extends Pirata {
     unPirata.tomarRonConJackSparrow()
   }
 
-  override def tipo(): String = {
-    "unico"
-  }
-
+  
   def aumentarEnergia(unValor : Int): Unit = {
     energiaInicial += unValor
   }
@@ -117,16 +101,13 @@ object jackSparrow extends Pirata {
 }
 
 class Humanoide extends Pirata {
-  var poderDePelea = 0
+  var poderDePelea : Double = 0
 
   override def poderDeMando(): Double = {
     energiaInicial * poderDePelea
   }
 
-  override def tipo(): String = {
-    "humanoide"
-  }
-
+  
   override def seHirio(unValor: Double): Unit = {
     poderDePelea *= unValor
   }
