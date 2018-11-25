@@ -2,41 +2,42 @@ import org.scalatest.FunSuite
 
 class testBarcos extends FunSuite {
   //------------------------ Piratas ------------------------------------
-  jackSparrow.ingredientes = "ron" :: jackSparrow.ingredientes
-  val barbaNegra = new Guerrero ; barbaNegra.poderDePelea = 20 ; barbaNegra.vitalidad = 50
-  val nails = new Cocinero ; nails.energiaInicial = 100 ; nails.moral = 60 ; nails.listaDeIngredientes = "jamon" :: nails.listaDeIngredientes
-  val albino = new Navegante ; albino.energiaInicial = 100 ; albino.inteligencia = 50
-  val calamardo = new Guerrero ; calamardo.energiaInicial = 100 ; calamardo.poderDePelea = 40 ; calamardo.vitalidad = 20
-  val patricio = new Navegante ; patricio.energiaInicial = 90 ; patricio.inteligencia = 10
-  val bobEsponja = new Cocinero ; bobEsponja.energiaInicial = 100 ; bobEsponja.moral = 100 ; bobEsponja.listaDeIngredientes = "cangreburguers" :: bobEsponja.listaDeIngredientes
-  val holandesVolador = new Guerrero ; holandesVolador.energiaInicial = 200 ; holandesVolador.poderDePelea = 150 ; holandesVolador.vitalidad = 90
+
+  val barbaNegra = new Guerrero(20,50)
+  barbaNegra.energiaInicial_(100)
+  val nails = new Cocinero(60,List("jamon","pimienta"))
+  nails.energiaInicial_(100)
+  val albino = new Navegante(50)
+  albino.energiaInicial_(100)
+  jackSparrow.energiaInicial_(500)
+  jackSparrow.poderDePelea_(200)
+  jackSparrow.inteligencia_(300)
+  jackSparrow.ingredientes_(List("ron"))
+
+  val calamardo = new Guerrero(40,20)
+  calamardo.energiaInicial_(100)
+  val patricio = new Navegante(10)
+  patricio.energiaInicial_(90)
+  val bobEsponja = new Cocinero(100,List("cangreburguer","salsa tartara"))
+  bobEsponja.energiaInicial_(100)
+  val holandesVolador = new Guerrero(150,90)
+  holandesVolador.energiaInicial_(200)
+
   //------------------------ Barcos ------------------------------------
-  val perlaNegra = new Barco
-  perlaNegra.resistencia = 70
-  perlaNegra.municiones = 5
-  perlaNegra.poderDefuego = 80
-  perlaNegra.tripulacion = List(barbaNegra,nails,albino,jackSparrow)
-  val shanghaied = new Barco
-  shanghaied.resistencia = 80
-  shanghaied.municiones = 7
-  shanghaied.poderDefuego = 50
-  shanghaied.tripulacion = List(calamardo,patricio,bobEsponja,holandesVolador)
+  val perlaNegra = new Barco(70,80,5,List(barbaNegra,nails,albino,jackSparrow),null,null)
+  val shanghaied = new Barco(80,50,7,List(calamardo,patricio,bobEsponja,holandesVolador),null,null)
 
 
-  test("Crear un barco de 4 tripulantes y elegir un capitan") {
+  test("Elegir un capitan para el Perla Negra") {
     perlaNegra.elegirCapitan()
     assert(perlaNegra.capitan == jackSparrow)
   }
-  /*
-  test("Hacer que el Perla Negra ataque al Shanghaied") {
-    perlaNegra.atacarA(shanghaied)
-    assert(shanghaied.resistencia == 0)
-    assert(shanghaied.poderDefuego == 0)
-    assert(shanghaied.municiones == 0)
-    assert(shanghaied.tripulacion.isEmpty)
-    assert(shanghaied.capitan == null)
+
+  test("Elegir un capitan para el Shanghaied") {
+    shanghaied.elegirCapitan()
+    assert(shanghaied.capitan == holandesVolador)
   }
-  */
+
   test("El Perla Negra dispara 7 cañonazos") {
     assertThrows[IllegalArgumentException] {
       perlaNegra.dispararCanionazos(7,shanghaied)
@@ -53,7 +54,7 @@ class testBarcos extends FunSuite {
   test("Aplicar el bonus que tiene el Perla Negra (esta en el bando union pirata)") {
     perlaNegra.bando = unionPirata
     perlaNegra.aplicarBonus()
-    assert(perlaNegra.poderDefuego == 140)
+    assert(perlaNegra.poderDeFuego == 140)
   }
 
   test("El Perla Negra cambia de bando a la armada inglesa y se aplica el bonus") {
@@ -68,4 +69,17 @@ class testBarcos extends FunSuite {
     assert(perlaNegra.tripulacion.length == 8)
   }
 
+}
+
+class testBarcosAtaque extends testBarcos{
+
+  test("Hacer que el Perla Negra ataque al Shanghaied") {
+    perlaNegra.atacarA(shanghaied)
+    assert(perlaNegra.tripulacion.length == 5)
+    assert(shanghaied.resistencia == 0)
+    assert(shanghaied.poderDeFuego == 0)
+    assert(shanghaied.municiones == 0)
+    assert(shanghaied.tripulacion.isEmpty)
+    assert(shanghaied.capitan == null)
+  }
 }
